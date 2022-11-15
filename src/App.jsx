@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useEffect } from 'react';
 
 const App = () => {
-  const [count, setCount] = useState(0);
-
+  const [time, setTime] = useState(new Date());
+  useEffect(() => {
+    setInterval( 
+      () => setTime(new Date())
+    ,1000)
+  },[])
   return (
     <div className="App">
       {/* <ReactAudioPlayer
@@ -17,11 +22,10 @@ const App = () => {
       </audio>
       
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
+        <h1>{time.toLocaleTimeString()}</h1>
         <p>
           <button onClick={ () => {let alarm = document.getElementById("alarm"); console.log(alarm); alarm.play()}}>
-            count is: {count}
+            ALARM
           </button>
 
         </p>

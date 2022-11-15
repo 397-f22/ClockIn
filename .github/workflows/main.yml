@@ -1,9 +1,7 @@
 name: React CI
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
+
 jobs:
   build:
     name: Build and unit test
@@ -37,6 +35,11 @@ jobs:
           start: npm run em:start
           wait-on: http://localhost:8080
 
+on:
+  push:
+    branches:
+      - main
+      
   deploy:
     name: Firebase deploy
     needs: [build, cypress]

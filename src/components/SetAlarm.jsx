@@ -10,6 +10,8 @@ const SetAlarm = ({ alarmList, setAlarmList }) => {
     console.log(alarm)
     setAlarmList([...alarmList, alarm]);
 
+    console.log(alarmList)
+
   }
 
   return (

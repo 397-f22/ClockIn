@@ -9,27 +9,18 @@ import Header from './components/Header';
 const App = () => {
 
   return (
-    <div className="App">
-      {/* <ReactAudioPlayer
-        src="../audio/alarm.mp3"
-        autoPlay
-        controls
-      /> */}
-      <audio id="alarm" controls autoPlay={true}>
+    <div>
+      <Header />
+
+      <AlarmList  />
+
+      {/* <audio id="alarm" controls autoPlay={true}>
         <source src="../audio/alarm.mp3" type="audio/mp3" />
       </audio>
 
-      <header className="App-header">
-        <Header />
-        <p>
-          <button onClick={() => { let alarm = document.getElementById("alarm"); console.log(alarm); alarm.play() }}>
-            ALARM
-          </button>
-
-        </p>
-             </header>
-
-      <AlarmList  />
+      <button onClick={() => { let alarm = document.getElementById("alarm"); console.log(alarm); alarm.play() }}>
+        ALARM
+      </button> */}
     </div>
   );
 };

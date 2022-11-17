@@ -4,7 +4,10 @@ const Alarm = ({ alarm }) => {
         <div>
             <div>{alarm.hour}</div>
             <div>{alarm.minute}</div>
-            
+            <label className="switch">
+                <input type="checkbox" checked={alarm.active} />
+                <span className="slider round"></span>
+            </label>
         </div>
     )
 }

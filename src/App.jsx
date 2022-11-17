@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect } from 'react';
 import SetAlarm from './components/SetAlarm';
+import AlarmList from './components/AlarmList';
 
 const App = () => {
   const [time, setTime] = useState(new Date());
@@ -12,7 +13,7 @@ const App = () => {
     ,1000)
   },[])
 
-  const [alarmList, setAlarmList] = useState();
+  const [alarmList, setAlarmList] = useState([]);
 
   const [alarmSelectedHour, setAlarmSelectedHour] = useState(0);
   const [alarmSelectedMinute, setAlarmSelectedMinute] = useState(0);
@@ -65,6 +66,8 @@ const App = () => {
           </a>
         </p>
       </header>
+
+      <AlarmList alarmList={alarmList}/>
     </div>
   );
 };

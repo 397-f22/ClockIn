@@ -12,6 +12,8 @@ const App = () => {
     ,1000)
   },[])
 
+  const [alarmList, setAlarmList] = useState();
+
   const [alarmSelectedHour, setAlarmSelectedHour] = useState(0);
   const [alarmSelectedMinute, setAlarmSelectedMinute] = useState(0);
 
@@ -30,10 +32,8 @@ const App = () => {
         <h1>{time.toLocaleTimeString()}</h1>
 
         <SetAlarm
-          alarmSelectedHour={alarmSelectedHour}
-          setAlarmSelectedHour={setAlarmSelectedHour}
-          alarmSelectedMinute={alarmSelectedMinute}
-          setAlarmSelectedMinute={setAlarmSelectedMinute}
+          alarmList={alarmList}
+          setAlarmList={setAlarmList}
         />
 
         <p>

@@ -1,17 +1,19 @@
 const SetAlarm = ({ alarmList, setAlarmList }) => {
   const createAlarm = (e) => {
+    e.preventDefault();
     const alarm =
     {
-      "hour": e.value[0],
-      "minute": e.value[1],
+      "hour": e.target[0].value,
+      "minute": e.target[1].value,
       "active": true
     };
-    e.preventDefault();
+    console.log(alarm)
     setAlarmList([...alarmList, alarm]);
+
   }
 
   return (
-    <form>
+    <form onSubmit={createAlarm}>
       <div className="setAlarm">
         <select>
           {
@@ -28,7 +30,7 @@ const SetAlarm = ({ alarmList, setAlarmList }) => {
           }
         </select>
       </div>
-      <button className="alarmSubmit" type="submit" onSubmit={createAlarm}>
+      <button className="alarmSubmit" type="submit" >
         Set Alarm
       </button>
     </form>)

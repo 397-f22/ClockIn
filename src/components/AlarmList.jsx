@@ -1,11 +1,22 @@
 import Alarm from "./Alarm"
-const AlarmList =  ({alarmList}) => {
+import SetAlarm from "./SetAlarm";
+import { useState } from "react";
+const AlarmList = () => {
+    const [alarmList, setAlarmList] = useState([]);
     console.log(alarmList);
     return (
         <div>
-        {
-            alarmList.map(alarm => (<Alarm alarm={alarm}/>))
-        }
+            <div>
+                <SetAlarm
+                    alarmList={alarmList}
+                    setAlarmList={setAlarmList}
+                />
+            </div>
+            <div>
+                {
+                    alarmList.map(alarm => (<Alarm alarm={alarm} />))
+                }
+            </div>
         </div>
     )
 

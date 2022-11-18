@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import SetAlarm from './components/SetAlarm';
 import AlarmList from './components/AlarmList';
 import Header from './components/Header';
+import WordPuzzle from './components/WordPuzzle';
 
 const App = () => {
 
@@ -30,6 +31,7 @@ const App = () => {
              </header>
 
       <AlarmList  />
+      <WordPuzzle  />
     </div>
   );
 };

@@ -11,13 +11,20 @@ const AlarmList = () => {
         <div className="alarm-list">
             <div className="set-alarm">
                 <SetAlarm
-                    alarmList={alarmList}
-                    setAlarmList={setAlarmList}
+                  alarmList={alarmList}
+                  setAlarmList={setAlarmList}
                 />
             </div>
             <div>
                 {
-                  alarmList.map((alarm, id) => (<Alarm key={id} alarm={alarm} />))
+                  alarmList.map((alarm, id) => (
+                    <Alarm
+                      key={id}
+                      alarmId={id}
+                      alarm={alarm}
+                      alarmList={alarmList}
+                      setAlarmList={setAlarmList}
+                    />))
                 }
             </div>
         </div>

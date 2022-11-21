@@ -11,16 +11,24 @@ const WordPuzzle = ({ setPuzzleSolveStatus }) => {
 
     useEffect(() => {
       if (currentSolution === word){
-        setTimeout(() => {
-          alert("Puzzle solved!");
-          document.getElementById("puzzle-input").value = "";
-          setCurrentSolution("");
-          setPuzzleSolveStatus(true);
+        alert("Puzzle solved!");
+        document.getElementById("puzzle-input").value = "";
+        setCurrentSolution("");
+        setPuzzleSolveStatus(true);
 
-          const alarm = document.getElementById("alarm");
-          alarm.mute = true;
-          alarm.pause();
-        }, 100);
+        const alarm = document.getElementById("alarm");
+        alarm.mute = true;
+        alarm.pause();
+        // setTimeout(() => {
+        //   alert("Puzzle solved!");
+        //   document.getElementById("puzzle-input").value = "";
+        //   setCurrentSolution("");
+        //   setPuzzleSolveStatus(true);
+
+        //   const alarm = document.getElementById("alarm");
+        //   alarm.mute = true;
+        //   alarm.pause();
+        // }, 100);
       }
     }, [currentSolution]);
 

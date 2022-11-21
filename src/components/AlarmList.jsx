@@ -11,31 +11,38 @@ const AlarmList = () => {
     const alarmShouldExpire = (alarmObj) => {
       const time = new Date();
       const currentHour = time.getHours(), currentMinute = time.getMinutes();
-      return parseInt(alarmObj.hour) === currentHour && parseInt(alarmObj.minute) == currentMinute;
+
+      const correctTime = (parseInt(alarmObj.hour) === currentHour && parseInt(alarmObj.minute) == currentMinute);
+      const active = alarmObj.active;
+
+      return correctTime && active;
     };
 
-   
+
 
     useEffect(() => {
-      if (alarmList.every(alarm => !alarm.ringing)) {
-        const alarm = document.getElementById("alarm");
-        alarm.pause();
-        console.log("pause?")
-      }
+      // if (alarmList.every(alarm => !alarm.ringing)) {
+      //   const alarm = document.getElementById("alarm");
+      //   alarm.pause();
+      //   console.log("pause");
+      // }
 
       setInterval(
         () => {
           const alarm = document.getElementById("alarm");
+          console.log("alarm should go off:", !alarmList.every(alarm => !alarmShouldExpire(alarm)))
+
           if (alarmList.every(alarm => !alarmShouldExpire(alarm))) {
-            
             alarm.pause();
+            console.log("pause");
             alarm.mute = true;
           }
           else {
             document.addEventListener("click", () => {
-                        alarm.play();
-                        alarm.loop = true
-                      });
+              alarm.play();
+              alarm.loop = true
+              console.log("play");
+            });
             //alarm.play();
             //Ringing, defined by us for if an alarm should be ringing
             //If the alarm should be ringing based purely on time and not on ringing variable

@@ -1,8 +1,11 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import PuzzleElement from "./PuzzleElement";
+import "./WordPuzzle.css";
 
 function shuffle(array) {
     let currentIndex = array.length, randomIndex;
+    let indices = [...Array(array.length).keys()];
 
     // While there remain elements to shuffle.
     while (currentIndex != 0) {
@@ -14,52 +17,49 @@ function shuffle(array) {
         // And swap it with the current element.
         [array[currentIndex], array[randomIndex]] = [
             array[randomIndex], array[currentIndex]];
+
+        [indices[currentIndex], indices[randomIndex]] = [
+          indices[randomIndex], indices[currentIndex]];
     }
 
-    return array;
+    return [array, indices];
 }
 
-
+const word = "describe";
+const [puzzle, correctIndices] = shuffle(Array.from(word));
 
 const WordPuzzle = ({alarmList, setAlarmList}) => {//take the alarm as input or the set alarm function to stop it
-    const [index, setIndex] = useState(0);
     const [currentSolution, setCurrentSolution] = useState([]);
-    let word = "describe"
-    let puzzle = shuffle(Array.from(word))
-    //HELLO
 
-    const submit = (e) => {
-        e.preventDefault();
-        if (e.target[0].value === word){
-            const alarm = document.getElementById("alarm");
-            
-            //let tempValForLater_Stored = alarmList.filter(alarm => alarm.ringing);
-            alarmList.forEach(alarm => alarm.ringing = false);
-            setAlarmList(alarmList);
-            alarm.mute = true;
-            alarm.pause();
-        }
-    }
+    useEffect(() => {
+      if (currentSolution === word){
+        alert("Puzzle solved!");
 
+        alarmList.forEach(alarm => alarm.ringing = false);
+        setAlarmList(alarmList);
 
-    //This part might have to go into a use effect
-    if (currentSolution === word) {
-        //stop the alarm
-    }
+        const alarm = document.getElementById("alarm");
+        alarm.mute = true;
+        alarm.pause();
+        console.log("pause");
+      }
+    }, [currentSolution]);
 
     return (//TODO: fill in empty slots using index and the word as an array
         <div>
             <div>
-                {/*Array.from(word).map(char => <div>___</div>)*/
-                }
-                <form onSubmit={submit}>
-                  <input/>
-                </form>
+              <input className="puzzle-input" onChange={(e) => setCurrentSolution(e.target.value)}/>
             </div>
-            <div>
-                {puzzle.map(char => <PuzzleElement char={char} currentSolution={currentSolution}
-                    setCurrentSolution={setCurrentSolution} index={index}
-                    setIndex={setIndex} word={word} />)}
+            <div className="puzzle-elements">
+                {puzzle.map((char, i) => (
+                  <PuzzleElement
+                    key={i}
+                    char={char}
+                    correctIndex={correctIndices[i]}
+                    word={word}
+                    currentSolution={currentSolution}
+                  />
+                ))}
             </div>
         </div>
     );

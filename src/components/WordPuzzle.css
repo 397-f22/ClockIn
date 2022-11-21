@@ -1,0 +1,12 @@
+.puzzle-input {
+  width: 200px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.puzzle-elements {
+  display: flex;
+  flex-direction: row;
+  width: 200px;
+  justify-content: space-evenly;
+}

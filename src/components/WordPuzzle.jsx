@@ -26,7 +26,7 @@ const WordPuzzle = ({alarmList, setAlarmList}) => {//take the alarm as input or 
     const [currentSolution, setCurrentSolution] = useState([]);
     let word = "describe"
     let puzzle = shuffle(Array.from(word))
-  
+    //HELLO
 
     const submit = (e) => {
         e.preventDefault();

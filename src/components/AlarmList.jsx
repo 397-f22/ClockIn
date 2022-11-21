@@ -48,7 +48,7 @@ const AlarmList = () => {
 
     return (
       <>
-        <audio id="alarm" controls="true" >
+        <audio id="alarm">
           <source src="../../audio/alarm.mp3" type="audio/mp3" />
         </audio>
         <div className="alarm-list">

@@ -41,35 +41,12 @@ const AlarmList = () => {
                 console.log("play");
               });
             };
-        }, 1000);
+        }, 100);
       };
 
       updateAlarm();
       return () => clearInterval(timer.current);
     }, [alarmList]);
-
-    // useEffect(() => {
-    //   setInterval(
-    //     () => {
-    //       const alarm = document.getElementById("alarm");
-    //       console.log(alarmList)
-
-    //       if (alarmList.every(alarm => !alarmShouldRing(alarm))) {
-    //         console.log("NO ALARM");
-    //         alarm.pause();
-    //         console.log("pause");
-    //         alarm.mute = true;
-    //       } else {
-    //         console.log("alarm should go off");
-    //         document.addEventListener("click", () => {
-    //           alarm.play();
-    //           alarm.loop = true;
-    //           alarm.mute = false;
-    //           console.log("play");
-    //         });
-    //       };
-    //     }, 3000)
-    // }, []);
 
     return (
       <>

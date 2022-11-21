@@ -3,6 +3,17 @@ import "./Alarm.css";
 const Alarm = ({ alarmId, alarm, alarmList, setAlarmList }) => {
   const handleChange = () => {
     console.log("handle alarm change");
+
+    console.log("GOAL", [
+      ...alarmList.slice(0, alarmId),
+      {
+        ...alarm,
+        active: !alarm.active
+      },
+      ...alarmList.slice(alarmId + 1)
+    ]);
+
+
     setAlarmList([
       ...alarmList.slice(0, alarmId),
       {

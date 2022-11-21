@@ -1,12 +1,13 @@
 import Alarm from "./Alarm"
 import SetAlarm from "./SetAlarm";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./AlarmList.css";
 import { mockAlarmList } from "../utils/mockAlarmList";
 import WordPuzzle from "./WordPuzzle";
 
 const AlarmList = () => {
     const [alarmList, setAlarmList] = useState(mockAlarmList);
+    const timer = useRef(null);
 
     const alarmShouldRing = (alarmObj) => {
       const time = new Date();
@@ -18,27 +19,57 @@ const AlarmList = () => {
       return correctTime && active;
     };
 
+    // https://stackoverflow.com/questions/64707231/updated-state-value-is-not-reflected-inside-setinterval-in-react
     useEffect(() => {
-      setInterval(
-        () => {
-          const alarm = document.getElementById("alarm");
-          console.log(alarmList)
+      const updateAlarm = () => {
+        timer.current = setInterval(
+          () => {
+            const alarm = document.getElementById("alarm");
+            console.log(alarmList)
 
-          if (alarmList.every(alarm => !alarmShouldRing(alarm))) {
-            alarm.pause();
-            console.log("pause");
-            alarm.mute = true;
-          } else {
-            document.addEventListener("click", () => {
-              alarm.play();
-              alarm.loop = true;
-              alarm.mute = false;
+            if (alarmList.every(alarm => !alarmShouldRing(alarm))) {
+              console.log("NO ALARM");
+              alarm.pause();
+              console.log("pause");
+              alarm.mute = true;
+            } else {
+              console.log("alarm should go off");
+              document.addEventListener("click", () => {
+                alarm.play();
+                alarm.loop = true;
+                alarm.mute = false;
+                console.log("play");
+              });
+            };
+        }, 1000);
+      };
 
-              console.log("play");
-            });
-          };
-        }, 3000)
-    }, []);
+      updateAlarm();
+      return () => clearInterval(timer.current);
+    }, [alarmList]);
+
+    // useEffect(() => {
+    //   setInterval(
+    //     () => {
+    //       const alarm = document.getElementById("alarm");
+    //       console.log(alarmList)
+
+    //       if (alarmList.every(alarm => !alarmShouldRing(alarm))) {
+    //         console.log("NO ALARM");
+    //         alarm.pause();
+    //         console.log("pause");
+    //         alarm.mute = true;
+    //       } else {
+    //         console.log("alarm should go off");
+    //         document.addEventListener("click", () => {
+    //           alarm.play();
+    //           alarm.loop = true;
+    //           alarm.mute = false;
+    //           console.log("play");
+    //         });
+    //       };
+    //     }, 3000)
+    // }, []);
 
     return (
       <>

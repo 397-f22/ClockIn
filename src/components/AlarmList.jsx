@@ -5,6 +5,7 @@ import "./AlarmList.css";
 import { mockAlarmList } from "../utils/mockAlarmList";
 import WordPuzzle from "./WordPuzzle";
 import { alarmShouldRing } from "../utils/helpers";
+import alarmRef from '../audio/alarm.mp3'
 
 const AlarmList = () => {
     const [alarmList, setAlarmList] = useState(mockAlarmList);
@@ -32,7 +33,7 @@ const AlarmList = () => {
     return (
       <>
         <audio id="alarm">
-          <source src="../../audio/alarm.mp3" type="audio/mp3" />
+          <source src={alarmRef} type="audio/mp3" />
         </audio>
 
         <div className="alarm-list">

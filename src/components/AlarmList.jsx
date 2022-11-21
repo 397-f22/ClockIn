@@ -3,6 +3,7 @@ import SetAlarm from "./SetAlarm";
 import { useState, useEffect } from "react";
 import "./AlarmList.css";
 import { mockAlarmList } from "../utils/mockAlarmList";
+import WordPuzzle from "./WordPuzzle";
 
 const AlarmList = () => {
     const [alarmList, setAlarmList] = useState(mockAlarmList);
@@ -70,7 +71,7 @@ const AlarmList = () => {
 
     return (
       <>
-        <audio id="alarm">
+        <audio id="alarm" controls="true" >
           <source src="../../audio/alarm.mp3" type="audio/mp3" />
         </audio>
         <div className="alarm-list">
@@ -95,6 +96,7 @@ const AlarmList = () => {
                 }
             </div>
             <hr className="alarm-puzzle-divider"/>
+            <WordPuzzle alarmList={alarmList} setAlarmList={setAlarmList}/>
         </div>
       </>
     )

@@ -13,7 +13,7 @@ const App = () => {
     <div>
       <Header />
       <AlarmList  />
-      <WordPuzzle  />
+      
     </div>
   );
 };

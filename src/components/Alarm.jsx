@@ -16,9 +16,9 @@ const Alarm = ({ alarmId, alarm, alarmList, setAlarmList }) => {
 
     return (
         <div className="alarm">
-          <div className={`${alarm.active ? "" : "alarm-inactive"}`}>{String(alarm.hour).padStart(2, '0')}:{String(alarm.minute).padStart(2, '0')}</div>
-          <label className="switch">
-              <input type="checkbox" checked={alarm.active} onChange={handleChange} />
+          <div className={`alarm-text ${alarm.active ? "" : "alarm-inactive"}`}>{String(alarm.hour).padStart(2, '0')}:{String(alarm.minute).padStart(2, '0')}</div>
+          <label>
+              <input className="alarm-checkbox" type="checkbox" checked={alarm.active} onChange={handleChange} />
               <span className="slider round"></span>
           </label>
         </div>

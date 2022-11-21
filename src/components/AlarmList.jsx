@@ -9,13 +9,15 @@ const AlarmList = () => {
 
     return (
         <div className="alarm-list">
+            <div className="headers">Set a New Alarm</div>
             <div className="set-alarm">
                 <SetAlarm
                   alarmList={alarmList}
                   setAlarmList={setAlarmList}
                 />
             </div>
-            <div>
+            <div className="headers">Current Alarms</div>
+            <div className="alarm-list-body">
                 {
                   alarmList.map((alarm, id) => (
                     <Alarm
@@ -27,6 +29,7 @@ const AlarmList = () => {
                     />))
                 }
             </div>
+            <hr className="alarm-puzzle-divider"/>
         </div>
     )
 };

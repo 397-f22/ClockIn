@@ -25,7 +25,7 @@ const Alarm = ({ alarmId, alarm, alarmList, setAlarmList }) => {
           {
             alarm.ringing
             &&
-            <div className="disable-alarm">Turn Off</div>
+            <button className="disable-alarm" onClick={() => {document.getElementById("alarm").muted = true;}}>Turn Off</button>
           }
         </div>
     )

@@ -7,7 +7,9 @@ import { mockAlarmList } from "../utils/mockAlarmList";
 const AlarmList = () => {
     const [alarmList, setAlarmList] = useState(mockAlarmList);
 
-    const alarmShouldExpire = (alarmObj, currentHour, currentMinute) => {
+    const alarmShouldExpire = (alarmObj) => {
+      const time = new Date();
+      const currentHour = time.getHours(), currentMinute = time.getMinutes();
       return parseInt(alarmObj.hour) === currentHour && parseInt(alarmObj.minute) == currentMinute;
     };
 
@@ -54,32 +56,16 @@ const AlarmList = () => {
         () => {
           const currentDatetime = new Date();
           const alarm = document.getElementById("alarm");
+          if (alarmList.every(alarm => !alarmShouldExpire(alarm))) {
+            alarm.pause();
+            alarm.mute = true;
+          }
+          else {
+            alarm.play();
+            alarm.mute = false;
+          }
 
-          for (let i = 0; i < alarmList.length; i++) {
-            if (!alarmList[i].active) {
-              continue;
-            };
-
-            if (alarmList[i].ringing) {
-              continue;
-            }
-
-            if (alarmShouldExpire(alarmList[i], currentDatetime.getHours(), currentDatetime.getMinutes())) {
-              document.addEventListener("click", () => {
-                alarm.play();
-              });
-
-              // setAlarmList([
-              //   ...alarmList.slice(0, i),
-              //   {
-              //     ...alarmList[i],
-              //     ringing: true
-              //   },
-              //   ...alarmList.slice(i + 1)
-              // ]);
-            };
-          };
-        }, 10000)
+        }, 1000)
     }, [alarmList]);
 
     return (

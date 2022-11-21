@@ -6,7 +6,6 @@ import { mockAlarmList } from "../utils/mockAlarmList";
 import WordPuzzle from "./WordPuzzle";
 
 const AlarmList = () => {
-    //HELLO AGAIN
     const [alarmList, setAlarmList] = useState(mockAlarmList);
 
     const alarmShouldExpire = (alarmObj) => {
@@ -15,37 +14,37 @@ const AlarmList = () => {
       return parseInt(alarmObj.hour) === currentHour && parseInt(alarmObj.minute) == currentMinute;
     };
 
-    useEffect(() => {
-      const currentDatetime = new Date();
-      const alarm = document.getElementById("alarm");
-    //   alarm.muted = true;
-    //   alarm.play();
+    // useEffect(() => {
+    //   const currentDatetime = new Date();
+    //   const alarm = document.getElementById("alarm");
+    // //   alarm.muted = true;
+    // //   alarm.play();
 
-      for (let i = 0; i < alarmList.length; i++) {
-        if (!alarmList[i].active) {
-          continue;
-        };
+    //   for (let i = 0; i < alarmList.length; i++) {
+    //     if (!alarmList[i].active) {
+    //       continue;
+    //     };
 
-        if (alarmList[i].ringing) {
-          continue;
-        }
+    //     if (alarmList[i].ringing) {
+    //       continue;
+    //     }
 
-        if (alarmShouldExpire(alarmList[i], currentDatetime.getHours(), currentDatetime.getMinutes())) {
-          document.addEventListener("click", () => {
-            alarm.play();
-          });
+    //     if (alarmShouldExpire(alarmList[i], currentDatetime.getHours(), currentDatetime.getMinutes())) {
+    //       document.addEventListener("click", () => {
+    //         alarm.play();
+    //       });
 
-          setAlarmList([
-            ...alarmList.slice(0, i),
-            {
-              ...alarmList[i],
-              ringing: true
-            },
-            ...alarmList.slice(i + 1)
-          ]);
-        };
-      };
-    }, []);
+    //       setAlarmList([
+    //         ...alarmList.slice(0, i),
+    //         {
+    //           ...alarmList[i],
+    //           ringing: true
+    //         },
+    //         ...alarmList.slice(i + 1)
+    //       ]);
+    //     };
+    //   };
+    // }, []);
 
     useEffect(() => {
       if (alarmList.every(alarm => !alarm.ringing)) {
@@ -56,18 +55,25 @@ const AlarmList = () => {
 
       setInterval(
         () => {
-          const currentDatetime = new Date();
           const alarm = document.getElementById("alarm");
           if (alarmList.every(alarm => !alarmShouldExpire(alarm))) {
+            
             alarm.pause();
             alarm.mute = true;
           }
           else {
-            alarm.play();
+            document.addEventListener("click", () => {
+                        alarm.play();
+                        alarm.loop = true
+                      });
+            //alarm.play();
+            //Ringing, defined by us for if an alarm should be ringing
+            //If the alarm should be ringing based purely on time and not on ringing variable
             alarm.mute = false;
           }
 
-        }, 1000)
+        },
+         1000)
     }, [alarmList]);
 
     return (

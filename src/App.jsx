@@ -5,22 +5,15 @@ import { useEffect } from 'react';
 import SetAlarm from './components/SetAlarm';
 import AlarmList from './components/AlarmList';
 import Header from './components/Header';
+import WordPuzzle from './components/WordPuzzle';
 
 const App = () => {
 
   return (
     <div>
       <Header />
-
       <AlarmList  />
-
-      {/* <audio id="alarm" controls autoPlay={true}>
-        <source src="../audio/alarm.mp3" type="audio/mp3" />
-      </audio>
-
-      <button onClick={() => { let alarm = document.getElementById("alarm"); console.log(alarm); alarm.play() }}>
-        ALARM
-      </button> */}
+      
     </div>
   );
 };

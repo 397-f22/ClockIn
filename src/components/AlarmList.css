@@ -4,3 +4,23 @@
   padding-top: 60px;
   align-items: center;
 }
+
+.headers {
+  margin: 10px 0;
+  font-size: 32px;
+}
+
+.alarm-list-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 200px;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.alarm-puzzle-divider {
+  border: 1px solid black;
+  width: 100%;
+  margin: 20px 0;
+}

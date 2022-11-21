@@ -1,16 +1,34 @@
 import "./Alarm.css";
 
-const Alarm = ({ alarm }) => {
+const Alarm = ({ alarmId, alarm, alarmList, setAlarmList }) => {
+  const handleChange = () => {
+    if (alarm.ringing) {
+      const alarmAudio = document.getElementById("alarm");
+      alarmAudio.muted = true;
+    };
+
+    setAlarmList([
+      ...alarmList.slice(0, alarmId),
+      {
+        ...alarm,
+        active: !alarm.active,
+        ringing: false
+      },
+      ...alarmList.slice(alarmId + 1)
+    ]);
+  };
 
     return (
         <div className="alarm">
-          <div>{String(alarm.hour).padStart(2, '0')}:{String(alarm.minute).padStart(2, '0')}</div>
-          <label className="switch">
-              <input type="checkbox" checked={alarm.active} readOnly />
-              <span className="slider round"></span>
-          </label>
+          <div className={`alarm-text ${alarm.active ? "" : "alarm-inactive"}`}>{String(alarm.hour).padStart(2, '0')}:{String(alarm.minute).padStart(2, '0')}</div>
+          <input className="alarm-checkbox" type="checkbox" checked={alarm.active} onChange={handleChange} />
+          {
+            alarm.ringing
+            &&
+            <button className="disable-alarm" onClick={() => {document.getElementById("alarm").muted = true;}}>Turn Off</button>
+          }
         </div>
     )
-}
+};
 
 export default Alarm;

@@ -8,7 +8,7 @@ import WordPuzzle from "./WordPuzzle";
 const AlarmList = () => {
     const [alarmList, setAlarmList] = useState(mockAlarmList);
 
-    const alarmShouldExpire = (alarmObj) => {
+    const alarmShouldRing = (alarmObj) => {
       const time = new Date();
       const currentHour = time.getHours(), currentMinute = time.getMinutes();
 
@@ -18,40 +18,27 @@ const AlarmList = () => {
       return correctTime && active;
     };
 
-
-
     useEffect(() => {
-      // if (alarmList.every(alarm => !alarm.ringing)) {
-      //   const alarm = document.getElementById("alarm");
-      //   alarm.pause();
-      //   console.log("pause");
-      // }
-
       setInterval(
         () => {
           const alarm = document.getElementById("alarm");
-          console.log("alarm should go off:", !alarmList.every(alarm => !alarmShouldExpire(alarm)))
+          console.log(alarmList)
 
-          if (alarmList.every(alarm => !alarmShouldExpire(alarm))) {
+          if (alarmList.every(alarm => !alarmShouldRing(alarm))) {
             alarm.pause();
             console.log("pause");
             alarm.mute = true;
-          }
-          else {
+          } else {
             document.addEventListener("click", () => {
               alarm.play();
-              alarm.loop = true
+              alarm.loop = true;
+              alarm.mute = false;
+
               console.log("play");
             });
-            //alarm.play();
-            //Ringing, defined by us for if an alarm should be ringing
-            //If the alarm should be ringing based purely on time and not on ringing variable
-            alarm.mute = false;
-          }
-
-        },
-         1000)
-    }, [alarmList]);
+          };
+        }, 3000)
+    }, []);
 
     return (
       <>
@@ -80,7 +67,7 @@ const AlarmList = () => {
                 }
             </div>
             <hr className="alarm-puzzle-divider"/>
-            <WordPuzzle alarmList={alarmList} setAlarmList={setAlarmList}/>
+            <WordPuzzle />
         </div>
       </>
     )

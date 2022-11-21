@@ -1,26 +1,7 @@
 import { useEffect } from "react";
 import "./PuzzleElement.css";
 
-const PuzzleElement = ({char, correctIndex, word, currentSolution}) => {
-    const checkCorrect = () => {
-      if(char === word[index]){
-      setCurrentSolution([...currentSolution,char])
-      setIndex(index+1)
-      //Remove button or set it as gray
-      }
-      else{
-          //glow red or something?
-      }
-    }
-
-    // document.addEventListener("DOMContentLoaded", () => {
-    //   const charDiv = document.getElementById(`char-${correctIndex}`);
-
-    //   useEffect(() => {
-    //     charDiv.className = determineStyling();
-    //   }, [currentSolution]);
-    // });
-
+const PuzzleElement = ({char, correctIndex, currentSolution}) => {
     const charDiv = document.getElementById(`char-${correctIndex}`);
 
     useEffect(() => {

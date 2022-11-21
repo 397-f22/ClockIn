@@ -9,7 +9,6 @@ const SetAlarm = ({ alarmList, setAlarmList }) => {
       "minute": e.target[1].value,
       "active": true
     };
-    console.log(alarm)
     setAlarmList([...alarmList, alarm]);
   }
 

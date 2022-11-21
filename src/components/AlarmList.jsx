@@ -14,6 +14,8 @@ const AlarmList = () => {
     useEffect(() => {
       const currentDatetime = new Date();
       const alarm = document.getElementById("alarm");
+    //   alarm.muted = true;
+    //   alarm.play();
 
       for (let i = 0; i < alarmList.length; i++) {
         if (!alarmList[i].active) {
@@ -44,7 +46,7 @@ const AlarmList = () => {
     useEffect(() => {
       if (alarmList.every(alarm => !alarm.ringing)) {
         const alarm = document.getElementById("alarm");
-        alarm.muted = true;
+        alarm.pause();
         console.log("pause?")
       }
 
@@ -83,7 +85,7 @@ const AlarmList = () => {
     return (
       <>
         <audio id="alarm">
-          <source src="../audio/alarm.mp3" type="audio/mp3" />
+          <source src="../../audio/alarm.mp3" type="audio/mp3" />
         </audio>
         <div className="alarm-list">
             <div className="headers">Set a New Alarm</div>

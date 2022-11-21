@@ -20,7 +20,6 @@ const AlarmList = () => {
 
             if (alarmList.every(alarm => !alarmShouldRing(alarm))) {
               alarm.pause();
-              console.log("pause");
               alarm.mute = true;
             }
         }, 1000);

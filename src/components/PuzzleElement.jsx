@@ -6,7 +6,6 @@ const PuzzleElement = ({char, correctIndex, currentSolution}) => {
 
     useEffect(() => {
       if (charDiv !== null) {
-        console.log(charDiv)
         charDiv.className = determineStyling();
       }
     }, [currentSolution]);

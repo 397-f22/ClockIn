@@ -25,8 +25,5 @@ export const alarmShouldRing = (alarmObj) => {
   const correctTime = (parseInt(alarmObj.hour) === currentHour && parseInt(alarmObj.minute) === currentMinute);
   const active = alarmObj.active;
 
-  if (correctTime && active) {
-    console.log(alarmObj)
-  }
   return correctTime && active;
 };

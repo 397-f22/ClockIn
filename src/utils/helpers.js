@@ -15,3 +15,16 @@ export const shuffle = (array) => {
 
   return [array, indices];
 };
+
+export const alarmShouldRing = (alarmObj) => {
+  const time = new Date();
+  const currentHour = time.getHours(), currentMinute = time.getMinutes();
+
+  const correctTime = (parseInt(alarmObj.hour) === currentHour && parseInt(alarmObj.minute) === currentMinute);
+  const active = alarmObj.active;
+
+  if (correctTime && active) {
+    console.log(alarmObj)
+  }
+  return correctTime && active;
+};

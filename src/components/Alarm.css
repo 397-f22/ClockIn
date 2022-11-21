@@ -19,11 +19,11 @@
   height: 20px;
 }
 
-.disable-alarm {
+.alarm-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80px;
+  width: 100px;
   height: 30px;
   background-color: lightblue;
   border-radius: 20px;
@@ -32,11 +32,19 @@
   cursor: pointer;
 }
 
-.disable-alarm:hover {
+.alarm-button:hover:not(.alarm-active) {
   opacity: 0.8;
 }
 
-.disable-alarm:active {
+.alarm-button:active:not(.alarm-active) {
   opacity: 0.6;
   box-shadow: 5px 5px 5px lightgray;
 }
+
+.alarm-active {
+  background-color: red;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+

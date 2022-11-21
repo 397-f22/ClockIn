@@ -39,7 +39,6 @@ const Alarm = ({ alarmId, alarm, alarmList, setAlarmList, puzzleSolveStatus, set
 
     setAlarmOn(true);
     setPuzzleSolveStatus(false);
-    console.log("play");
   };
 
     return (
@@ -52,10 +51,8 @@ const Alarm = ({ alarmId, alarm, alarmList, setAlarmList, puzzleSolveStatus, set
           <div className={`alarm-button ${(alarmOn && !puzzleSolveStatus) ? "alarm-active" : ""}`} onClick={handleClick}>
             {
             (alarmOn && !puzzleSolveStatus)
-            ?
-            "Stop Alarm"
-            :
-            "Start Alarm"
+            ? "Stop Alarm"
+            : "Start Alarm"
             }
           </div>
         }

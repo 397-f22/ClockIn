@@ -63,7 +63,7 @@ const AlarmList = () => {
             <WordPuzzle setPuzzleSolveStatus={setPuzzleSolveStatus} />
         </div>
       </>
-    )
+    );
 };
 
 export default AlarmList;

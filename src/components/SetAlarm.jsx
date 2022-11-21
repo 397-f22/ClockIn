@@ -3,8 +3,7 @@ import "./SetAlarm.css";
 const SetAlarm = ({ alarmList, setAlarmList }) => {
   const createAlarm = (e) => {
     e.preventDefault();
-    const alarm =
-    {
+    const alarm = {
       "hour": e.target[0].value,
       "minute": e.target[1].value,
       "active": true
@@ -43,7 +42,8 @@ const SetAlarm = ({ alarmList, setAlarmList }) => {
           </button>
         </div>
       </div>
-    </form>)
+    </form>
+    );
 };
 
 export default SetAlarm;

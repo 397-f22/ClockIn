@@ -20,10 +20,7 @@ const AlarmList = () => {
             const alarm = document.getElementById("alarm");
 
             if (alarmList.some(alarm => alarmShouldRing(alarm))) {
-              //alarm.click();
               alarm.play();
-              console.log(alarm.muted);
-              alarm.muted = false;
             }
         }, 1000);
       };
@@ -34,7 +31,7 @@ const AlarmList = () => {
 
     return (
       <>
-        <audio id="alarm" autoPlay muted>
+        <audio id="alarm" loop>
           <source src={alarmRef} type="audio/mp3" />
         </audio>
 
@@ -56,8 +53,6 @@ const AlarmList = () => {
                       alarm={alarm}
                       alarmList={alarmList}
                       setAlarmList={setAlarmList}
-                      puzzleSolveStatus={puzzleSolveStatus}
-                      setPuzzleSolveStatus={setPuzzleSolveStatus}
                     />))
                 }
             </div>

@@ -6,7 +6,7 @@ import { word, shuffle } from "../utils/helpers";
 
 const [puzzle, correctIndices] = shuffle(Array.from(word));
 
-const WordPuzzle = ({ setPuzzleSolveStatus }) => {
+const WordPuzzle = ({ setPuzzleSolveStatus, setAlarmRinging }) => {
     const [currentSolution, setCurrentSolution] = useState([]);
 
     useEffect(() => {
@@ -19,6 +19,7 @@ const WordPuzzle = ({ setPuzzleSolveStatus }) => {
         const alarm = document.getElementById("alarm");
         alarm.mute = true;
         alarm.pause();
+        setAlarmRinging(false);
         // setTimeout(() => {
         //   alert("Puzzle solved!");
         //   document.getElementById("puzzle-input").value = "";

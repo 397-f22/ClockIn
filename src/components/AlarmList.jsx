@@ -19,9 +19,11 @@ const AlarmList = () => {
           () => {
             const alarm = document.getElementById("alarm");
 
-            if (alarmList.every(alarm => !alarmShouldRing(alarm))) {
-              alarm.pause();
-              alarm.mute = true;
+            if (alarmList.some(alarm => alarmShouldRing(alarm))) {
+              //alarm.click();
+              alarm.play();
+              console.log(alarm.muted);
+              alarm.muted = false;
             }
         }, 1000);
       };
@@ -32,7 +34,7 @@ const AlarmList = () => {
 
     return (
       <>
-        <audio id="alarm">
+        <audio id="alarm" autoPlay muted>
           <source src={alarmRef} type="audio/mp3" />
         </audio>
 

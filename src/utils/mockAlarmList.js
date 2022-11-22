@@ -4,21 +4,21 @@ export const mockAlarmList = [
   {
       "hour": "10",
       "minute": "00",
-      "active": true,
+      "active": false,
   },
   {
       "hour": "9",
       "minute": "15",
-      "active": true,
+      "active": false,
   },
   {
       "hour": "6",
       "minute": "30",
-      "active": true,
+      "active": false,
   },
   {
     "hour": d.getHours(),
-    "minute": d.getMinutes(),
-    "active": true,
+    "minute": d.getMinutes() + 1,
+    "active": false,
   }
 ];

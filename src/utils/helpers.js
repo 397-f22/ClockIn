@@ -20,9 +20,9 @@ export const shuffle = (array) => {
 
 export const alarmShouldRing = (alarmObj) => {
   const time = new Date();
-  const currentHour = time.getHours(), currentMinute = time.getMinutes();
+  const currentHour = time.getHours(), currentMinute = time.getMinutes(), currentSecond = time.getSeconds();
 
-  const correctTime = (parseInt(alarmObj.hour) === currentHour && parseInt(alarmObj.minute) === currentMinute);
+  const correctTime = (parseInt(alarmObj.hour) === currentHour && parseInt(alarmObj.minute) === currentMinute && currentSecond < 2);
   const active = alarmObj.active;
 
   return correctTime && active;

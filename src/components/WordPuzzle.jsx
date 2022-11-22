@@ -2,11 +2,15 @@ import { useEffect } from "react";
 import { useState } from "react";
 import PuzzleElement from "./PuzzleElement";
 import "./WordPuzzle.css";
-import { word, shuffle } from "../utils/helpers";
+import { shuffle } from "../utils/helpers";
+import { wordList } from "../utils/8_letter_words.js"
 
+const randomIndex = Math.floor(Math.random() * wordList.length);
+const word = wordList[randomIndex]["word"];
 const [puzzle, correctIndices] = shuffle(Array.from(word));
 
-const WordPuzzle = ({ setPuzzleSolveStatus }) => {
+const WordPuzzle = ({ setPuzzleSolveStatus, setAlarmRinging }) => {
+  
     const [currentSolution, setCurrentSolution] = useState([]);
 
     useEffect(() => {
@@ -19,6 +23,7 @@ const WordPuzzle = ({ setPuzzleSolveStatus }) => {
         const alarm = document.getElementById("alarm");
         alarm.mute = true;
         alarm.pause();
+        setAlarmRinging(false);
         // setTimeout(() => {
         //   alert("Puzzle solved!");
         //   document.getElementById("puzzle-input").value = "";

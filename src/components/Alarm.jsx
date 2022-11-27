@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import "./Alarm.css";
-import { alarmShouldRing } from "../utils/helpers";
+import { parseAlarmTimeString } from "../utils/helpers";
 
 const Alarm = ({ alarmId, alarm, alarmList, setAlarmList, }) => {
 
@@ -17,7 +17,7 @@ const Alarm = ({ alarmId, alarm, alarmList, setAlarmList, }) => {
 
     return (
       <div className="alarm">
-        <div className={`alarm-text ${alarm.active ? "" : "alarm-inactive"}`}>{String(alarm.hour).padStart(2, '0')}:{String(alarm.minute).padStart(2, '0')}</div>
+        <div className={`alarm-text ${alarm.active ? "" : "alarm-inactive"}`}>{parseAlarmTimeString(alarm)}</div>
         <input className="alarm-checkbox" type="checkbox" checked={alarm.active} onChange={handleChange} />
       </div>
     )

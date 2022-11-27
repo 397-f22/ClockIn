@@ -1,5 +1,3 @@
-export const word = "describe";
-
 export const shuffle = (array) => {
   let currentIndex = array.length, randomIndex;
   let indices = [...Array(array.length).keys()];

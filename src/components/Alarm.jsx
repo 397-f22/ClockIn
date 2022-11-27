@@ -1,4 +1,3 @@
-import { useEffect, useState, useRef } from "react";
 import "./Alarm.css";
 import { parseAlarmTimeString } from "../utils/helpers";
 

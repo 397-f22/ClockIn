@@ -10,7 +10,6 @@ const word = wordList[randomIndex]["word"];
 const [puzzle, correctIndices] = shuffle(Array.from(word));
 
 const WordPuzzle = ({ setPuzzleSolveStatus, setAlarmRinging }) => {
-  
     const [currentSolution, setCurrentSolution] = useState([]);
 
     useEffect(() => {
@@ -24,16 +23,6 @@ const WordPuzzle = ({ setPuzzleSolveStatus, setAlarmRinging }) => {
         alarm.mute = true;
         alarm.pause();
         setAlarmRinging(false);
-        // setTimeout(() => {
-        //   alert("Puzzle solved!");
-        //   document.getElementById("puzzle-input").value = "";
-        //   setCurrentSolution("");
-        //   setPuzzleSolveStatus(true);
-
-        //   const alarm = document.getElementById("alarm");
-        //   alarm.mute = true;
-        //   alarm.pause();
-        // }, 100);
       }
     }, [currentSolution]);
 

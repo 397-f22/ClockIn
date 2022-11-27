@@ -9,7 +9,6 @@ import alarmRef from '../audio/alarm.mp3'
 
 const AlarmList = () => {
   const [alarmList, setAlarmList] = useState(mockAlarmList);
-  const [puzzleSolveStatus, setPuzzleSolveStatus] = useState(false);
   const timer = useRef(null);
   const [alarmRinging, setAlarmRinging] = useState(false);
 
@@ -59,8 +58,11 @@ const AlarmList = () => {
           }
         </div>
         <hr className="alarm-puzzle-divider" />
-        {alarmRinging && !puzzleSolveStatus
-          && <WordPuzzle setPuzzleSolveStatus={setPuzzleSolveStatus} setAlarmRinging={setAlarmRinging} />
+        {alarmRinging
+          &&
+          <WordPuzzle
+            setAlarmRinging={setAlarmRinging}
+          />
         }
       </div>
     </>

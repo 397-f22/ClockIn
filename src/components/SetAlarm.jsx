@@ -7,6 +7,11 @@ const SetAlarm = ({ alarmList, setAlarmList, nextAlarmId, setNextAlarmId, curren
   const createAlarm = (e) => {
     e.preventDefault();
 
+    if (!currentUser) {
+      alert("Please login to create new alarms!");
+      return;
+    };
+
     const alarm = {
       "hour": e.target[2].value == "AM" ? e.target[0].value : String(parseInt(e.target[0].value) + 12),
       "minute": e.target[1].value,

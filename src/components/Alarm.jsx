@@ -2,10 +2,15 @@ import "./Alarm.css";
 import { parseAlarmTimeString } from "../utils/helpers";
 import { useDbUpdate } from "../utils/firebase";
 
-const Alarm = ({ alarmIdList, alarmIdDb, alarm, alarmList, setAlarmList, }) => {
+const Alarm = ({ currentUser, alarmIdList, alarmIdDb, alarm, alarmList, setAlarmList }) => {
   const [update, result] = useDbUpdate(`alarms/${alarmIdDb}`);
 
   const handleChange = () => {
+    if (!currentUser) {
+      alert("Please login first to edit alarms!");
+      return;
+    };
+
     setAlarmList([
       ...alarmList.slice(0, alarmIdList),
       {

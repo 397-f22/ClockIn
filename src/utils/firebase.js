@@ -17,6 +17,12 @@ const firebaseConfig = {
 const firebase = initializeApp(firebaseConfig);
 const database = getDatabase(firebase);
 
+// export const overrideDbData = (path, newData) => {
+//   set(ref(database, path), {
+//     newData.
+//   });
+// };
+
 export const useDbData = (path) => {
   const [data, setData] = useState();
   const [error, setError] = useState(null);

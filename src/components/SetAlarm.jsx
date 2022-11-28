@@ -1,15 +1,27 @@
 import "./SetAlarm.css";
+import { useDbUpdate } from "../utils/firebase";
 
-const SetAlarm = ({ alarmList, setAlarmList }) => {
+const SetAlarm = ({ alarmList, setAlarmList, nextAlarmId, setNextAlarmId, currentUser }) => {
+  const [update, result] = useDbUpdate(`alarms/${nextAlarmId}`);
+
   const createAlarm = (e) => {
     e.preventDefault();
+
     const alarm = {
       "hour": e.target[2].value == "AM" ? e.target[0].value : String(parseInt(e.target[0].value) + 12),
       "minute": e.target[1].value,
       "active": true
     };
+
     setAlarmList([...alarmList, alarm]);
-  }
+    setNextAlarmId(nextAlarmId + 1);
+
+    update({
+      ...alarm,
+      "alarm_id": nextAlarmId,
+      "uid": currentUser.uid
+    });
+  };
 
   return (
     <form onSubmit={createAlarm}>

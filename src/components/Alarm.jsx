@@ -1,17 +1,26 @@
 import "./Alarm.css";
 import { parseAlarmTimeString } from "../utils/helpers";
+import { useDbUpdate } from "../utils/firebase";
 
-const Alarm = ({ alarmId, alarm, alarmList, setAlarmList, }) => {
+const Alarm = ({ alarmIdList, alarmIdDb, alarm, alarmList, setAlarmList, }) => {
+  const [update, result] = useDbUpdate(`alarms/${alarmIdDb}`);
 
   const handleChange = () => {
     setAlarmList([
-      ...alarmList.slice(0, alarmId),
+      ...alarmList.slice(0, alarmIdList),
       {
         ...alarm,
         active: !alarm.active
       },
-      ...alarmList.slice(alarmId + 1)
+      ...alarmList.slice(alarmIdList + 1)
     ]);
+
+    console.log(alarmIdDb)
+
+    update({
+      ...alarm,
+      "active": !alarm.active
+    });
   };
 
     return (

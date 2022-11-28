@@ -9,11 +9,15 @@ import alarmRef from '../audio/alarm.mp3'
 const AlarmList = ({ currentUser, users, alarms }) => {
   const uid = !currentUser ? "guest" : currentUser.uid;
   const [alarmList, setAlarmList] = useState(alarms.filter(alarm => alarm.uid === uid));
-  const [puzzleSolveStatus, setPuzzleSolveStatus] = useState(false);
-  const timer = useRef(null);
   const [alarmRinging, setAlarmRinging] = useState(false);
 
+  const [puzzleSolveStatus, setPuzzleSolveStatus] = useState(false);
+
+  const [nextAlarmId, setNextAlarmId] = useState(alarms.length);
+
   // https://stackoverflow.com/questions/64707231/updated-state-value-is-not-reflected-inside-setinterval-in-react
+  const timer = useRef(null);
+
   useEffect(() => {
     const updateAlarm = () => {
       timer.current = setInterval(
@@ -31,6 +35,11 @@ const AlarmList = ({ currentUser, users, alarms }) => {
     return () => clearInterval(timer.current);
   }, [alarmList]);
 
+  useEffect(() => {
+    const uid = !currentUser ? "guest" : currentUser.uid;
+    setAlarmList(alarms.filter(alarm => alarm.uid === uid));
+  }, [currentUser, nextAlarmId]);
+
   return (
     <>
       <audio id="alarm" loop>
@@ -43,6 +52,9 @@ const AlarmList = ({ currentUser, users, alarms }) => {
           <SetAlarm
             alarmList={alarmList}
             setAlarmList={setAlarmList}
+            nextAlarmId={nextAlarmId}
+            setNextAlarmId={setNextAlarmId}
+            currentUser={currentUser}
           />
         </div>
         <div className="headers">Current Alarms</div>
@@ -51,7 +63,8 @@ const AlarmList = ({ currentUser, users, alarms }) => {
             alarmList.map((alarm, id) => (
               <Alarm
                 key={id}
-                alarmId={id}
+                alarmIdList={id}
+                alarmIdDb={alarm.alarm_id}
                 alarm={alarm}
                 alarmList={alarmList}
                 setAlarmList={setAlarmList}

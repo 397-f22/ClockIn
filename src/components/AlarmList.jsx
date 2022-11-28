@@ -7,6 +7,7 @@ import { alarmShouldRing } from "../utils/helpers";
 import alarmRef from '../audio/alarm.mp3';
 import { mockCurrentAlarmData } from "../utils/helpers";
 import { useDbUpdate } from "../utils/firebase";
+import MathPuzzle from "./MathPuzzle"
 
 const AlarmList = ({ currentUser, alarms }) => {
   const uid = !currentUser ? "guest" : currentUser.uid;
@@ -79,7 +80,10 @@ const AlarmList = ({ currentUser, alarms }) => {
         <hr className="alarm-puzzle-divider" />
         {alarmRinging
           &&
-          <WordPuzzle
+          // <WordPuzzle
+          //   setAlarmRinging={setAlarmRinging}
+          // />
+          <MathPuzzle
             setAlarmRinging={setAlarmRinging}
           />
         }

@@ -7,24 +7,28 @@ let solution, problem;
 const generateMath = () => {
   let num1, num2;
   let operation;
-  num1 = Math.ceil(Math.random() * 12)
-  num2 = Math.ceil(Math.random() * 12)
-  operation = operations[Math.floor(Math.random() * 4)]
+  num1 = Math.ceil(Math.random() * 12);
+  num2 = Math.ceil(Math.random() * 12);
+  operation = operations[Math.floor(Math.random() * 4)];
 
   switch (operation) {
     case "addition":
-      solution = num1 + num2
-      problem = `${num1} + ${num2} = ?`
+      solution = num1 + num2;
+      problem = `${num1} + ${num2} = ?`;
+      break;
     case "subtraction":
-      solution = num1 - num2
-      problem = `${num1} - ${num2} = ?`
+      solution = num1 - num2;
+      problem = `${num1} - ${num2} = ?`;
+      break;
     case "multiplication":
-      solution = num1 * num2
-      problem = `${num1} * ${num2} = ?`
+      solution = num1 * num2;
+      problem = `${num1} * ${num2} = ?`;
+      break;
     case "division":
-      solution = num1
-      num1 = num1 * num2
-      problem = `${num1} / ${num2} = ?`
+      solution = num1;
+      num1 = num1 * num2;
+      problem = `${num1} / ${num2} = ?`;
+      break;
   }
 }
 

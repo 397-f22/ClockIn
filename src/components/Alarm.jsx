@@ -1,8 +1,9 @@
 import "./Alarm.css";
 import { parseAlarmTimeString } from "../utils/helpers";
 import { useDbUpdate } from "../utils/firebase";
-
+const dummyUID = -77;
 const Alarm = ({ currentUser, alarmIdList, alarmIdDb, alarm, alarmList, setAlarmList }) => {
+  
   const [update, result] = useDbUpdate(`alarms/${alarmIdDb}`);
 
   const handleChange = () => {
@@ -36,7 +37,8 @@ const Alarm = ({ currentUser, alarmIdList, alarmIdDb, alarm, alarmList, setAlarm
 
     console.log(alarmIdDb)
 
-    update(null);
+    update({...alarm,
+      "uid": dummyUID});
 
   }
 

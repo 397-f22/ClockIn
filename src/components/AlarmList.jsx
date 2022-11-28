@@ -81,11 +81,9 @@ const AlarmList = ({ currentUser, alarms }) => {
           }
         </div>
         <hr className="alarm-puzzle-divider" />
-        {
-        alarmRinging
-        && !puzzleSolveStatus
-        && <WordPuzzle
-            setPuzzleSolveStatus={setPuzzleSolveStatus}
+        {alarmRinging
+          &&
+          <WordPuzzle
             setAlarmRinging={setAlarmRinging}
           />
         }

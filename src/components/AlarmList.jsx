@@ -15,14 +15,6 @@ const AlarmList = ({ currentUser, alarms }) => {
   const [nextAlarmId, setNextAlarmId] = useState(alarms.length);
   const [alarmRinging, setAlarmRinging] = useState(false);
 
-  // NOTE: This is the "hacky" place where I try to add an alarm at index 0 that is based off the current time
-  const [update, result] = useDbUpdate("alarms/0");
-  useEffect(() => {
-    const currentAlarmObj = mockCurrentAlarmData(currentUser);
-    setAlarmList([currentAlarmObj, ...alarmList]);
-    update(currentAlarmObj);
-  }, [currentUser, nextAlarmId]);
-
   // https://stackoverflow.com/questions/64707231/updated-state-value-is-not-reflected-inside-setinterval-in-react
   const timer = useRef(null);
 
@@ -65,6 +57,8 @@ const AlarmList = ({ currentUser, alarms }) => {
             currentUser={currentUser}
           />
         </div>
+        {currentUser &&
+        <>
         <div className="headers">Current Alarms</div>
         <div className="alarm-list-body">
           {
@@ -80,6 +74,8 @@ const AlarmList = ({ currentUser, alarms }) => {
               />))
           }
         </div>
+        </>
+        }
         <hr className="alarm-puzzle-divider" />
         {alarmRinging
           &&
@@ -88,6 +84,7 @@ const AlarmList = ({ currentUser, alarms }) => {
           />
         }
       </div>
+
     </>
   );
 };

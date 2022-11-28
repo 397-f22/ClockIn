@@ -3,7 +3,7 @@ import { useState } from "react";
 import PuzzleElement from "./PuzzleElement";
 import "./WordPuzzle.css";
 import { shuffle } from "../utils/helpers";
-import { wordList } from "../utils/8_letter_words.js"
+import { wordList } from "../utils/wordList";
 
 let randomIndex = Math.floor(Math.random() * wordList.length);
 let word = wordList[randomIndex]["word"];

@@ -1,23 +1,36 @@
-import { useEffect, useState, useRef } from "react";
 import "./Alarm.css";
-import { alarmShouldRing } from "../utils/helpers";
+import { parseAlarmTimeString } from "../utils/helpers";
+import { useDbUpdate } from "../utils/firebase";
 
-const Alarm = ({ alarmId, alarm, alarmList, setAlarmList, }) => {
+const Alarm = ({ currentUser, alarmIdList, alarmIdDb, alarm, alarmList, setAlarmList }) => {
+  const [update, result] = useDbUpdate(`alarms/${alarmIdDb}`);
 
   const handleChange = () => {
+    if (!currentUser) {
+      alert("Please login first to edit alarms!");
+      return;
+    };
+
     setAlarmList([
-      ...alarmList.slice(0, alarmId),
+      ...alarmList.slice(0, alarmIdList),
       {
         ...alarm,
         active: !alarm.active
       },
-      ...alarmList.slice(alarmId + 1)
+      ...alarmList.slice(alarmIdList + 1)
     ]);
+
+    console.log(alarmIdDb)
+
+    update({
+      ...alarm,
+      "active": !alarm.active
+    });
   };
 
     return (
       <div className="alarm">
-        <div className={`alarm-text ${alarm.active ? "" : "alarm-inactive"}`}>{String(alarm.hour).padStart(2, '0')}:{String(alarm.minute).padStart(2, '0')}</div>
+        <div className={`alarm-text ${alarm.active ? "" : "alarm-inactive"}`}>{parseAlarmTimeString(alarm)}</div>
         <input className="alarm-checkbox" type="checkbox" checked={alarm.active} onChange={handleChange} />
       </div>
     )

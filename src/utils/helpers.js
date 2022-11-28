@@ -1,4 +1,16 @@
-export const word = "describe";
+export const mockCurrentAlarmData = (currentUser) => {
+  const d = new Date();
+
+  const alarmObj = {
+    "alarm_id": "0",
+    "hour": String(d.getHours()),
+    "minute": String(d.getMinutes() + 1),
+    "active": false,
+    "uid": !currentUser ? "guest" : currentUser.uid
+  };
+
+  return alarmObj;
+};
 
 export const shuffle = (array) => {
   let currentIndex = array.length, randomIndex;
@@ -26,4 +38,9 @@ export const alarmShouldRing = (alarmObj) => {
   const active = alarmObj.active;
 
   return correctTime && active;
+};
+
+export const parseAlarmTimeString = (alarmObj) => {
+  const alarmHour = parseInt(alarmObj.hour);
+  return String(alarmHour % 12).padStart(2, '0') + ":" + String(alarmObj.minute).padStart(2, '0') + " " + ((alarmHour > 12) ? "PM" : "AM");
 };

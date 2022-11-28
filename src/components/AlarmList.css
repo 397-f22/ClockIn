@@ -1,7 +1,6 @@
 .alarm-list {
   display: flex;
   flex-direction: column;
-  padding-top: 60px;
   align-items: center;
 }
 

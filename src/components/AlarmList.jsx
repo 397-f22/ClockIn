@@ -2,13 +2,13 @@ import Alarm from "./Alarm"
 import SetAlarm from "./SetAlarm";
 import { useState, useEffect, useRef } from "react";
 import "./AlarmList.css";
-import { mockAlarmList } from "../utils/mockAlarmList";
 import WordPuzzle from "./WordPuzzle";
 import { alarmShouldRing } from "../utils/helpers";
 import alarmRef from '../audio/alarm.mp3'
 
-const AlarmList = () => {
-  const [alarmList, setAlarmList] = useState(mockAlarmList);
+const AlarmList = ({ currentUser, users, alarms }) => {
+  const uid = !currentUser ? "guest" : currentUser.uid;
+  const [alarmList, setAlarmList] = useState(alarms.filter(alarm => alarm.uid === uid));
   const [puzzleSolveStatus, setPuzzleSolveStatus] = useState(false);
   const timer = useRef(null);
   const [alarmRinging, setAlarmRinging] = useState(false);
@@ -59,8 +59,13 @@ const AlarmList = () => {
           }
         </div>
         <hr className="alarm-puzzle-divider" />
-        {alarmRinging && !puzzleSolveStatus
-          && <WordPuzzle setPuzzleSolveStatus={setPuzzleSolveStatus} setAlarmRinging={setAlarmRinging} />
+        {
+        alarmRinging
+        && !puzzleSolveStatus
+        && <WordPuzzle
+            setPuzzleSolveStatus={setPuzzleSolveStatus}
+            setAlarmRinging={setAlarmRinging}
+          />
         }
       </div>
     </>

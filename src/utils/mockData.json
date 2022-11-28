@@ -1,0 +1,48 @@
+{
+  "users": { },
+  "alarms":
+    {
+      "0":
+      {
+        "hour": "10",
+        "minute": "00",
+        "active": false,
+        "uid": "hLpcTQYKEGaBW8oycK7UsNznIJL2"
+      },
+      "1":
+      {
+        "hour": "9",
+        "minute": "15",
+        "active": false,
+        "uid": "hLpcTQYKEGaBW8oycK7UsNznIJL2"
+      },
+      "2":
+      {
+        "hour": "6",
+        "minute": "30",
+        "active": false,
+        "uid": "hLpcTQYKEGaBW8oycK7UsNznIJL2"
+      },
+      "3":
+      {
+        "hour": "8",
+        "minute": "00",
+        "active": false,
+        "uid": "guest"
+      },
+      "4":
+      {
+        "hour": "9",
+        "minute": "30",
+        "active": false,
+        "uid": "guest"
+      },
+      "5":
+      {
+        "hour": "16",
+        "minute": "45",
+        "active": false,
+        "uid": "guest"
+      }
+    }
+}

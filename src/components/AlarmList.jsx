@@ -11,21 +11,20 @@ import MathPuzzle from "./MathPuzzle"
 import PuzzleModeSlider from "./PuzzleModeSlider";
 
 const AlarmList = ({ currentUser, alarms }) => {
-  const uid = !currentUser ? "guest" : currentUser.uid;
+  const uid = currentUser.uid;
   const [alarmList, setAlarmList] = useState(alarms.filter(alarm => alarm.uid === uid));
 
   const [nextAlarmId, setNextAlarmId] = useState(alarms.length);
   const [alarmRinging, setAlarmRinging] = useState(false);
-  console.log(currentUser.uid)
-  const [puzzleMode,setPuzzleMode] = useState(currentUser.puzzle_mode);
+  // console.log(currentUser.uid)
+  const [puzzleMode, setPuzzleMode] = useState(currentUser.puzzle_mode);
   const [update, result] = useDbUpdate(`users/${uid}`);
 
-  const changePuzzleMode = () =>{
-    setPuzzleMode(puzzleMode === "word" ? "math" : "word");
+  const changePuzzleMode = () => {
+    setPuzzleMode(puzzleMode === "word" ? "math" : "word")
     update({
-      "puzzle_mode": puzzleMode
-    });
-   
+      "puzzle_mode": puzzleMode === "word" ? "math" : "word"
+    })
   }
   // https://stackoverflow.com/questions/64707231/updated-state-value-is-not-reflected-inside-setinterval-in-react
   const timer = useRef(null);
@@ -48,7 +47,7 @@ const AlarmList = ({ currentUser, alarms }) => {
   }, [alarmList]);
 
   useEffect(() => {
-    const uid = !currentUser ? "guest" : currentUser.uid;
+    const uid = currentUser.uid;
     setAlarmList(alarms.filter(alarm => alarm.uid === uid));
   }, [currentUser, nextAlarmId]);
 
@@ -57,7 +56,7 @@ const AlarmList = ({ currentUser, alarms }) => {
       <audio id="alarm" loop>
         <source src={alarmRef} type="audio/mp3" />
       </audio>
-      <PuzzleModeSlider changePuzzleMode={changePuzzleMode} puzzleMode={puzzleMode}/>
+      <PuzzleModeSlider currentUser={currentUser} changePuzzleMode={changePuzzleMode} puzzleMode={puzzleMode} />
       <div className="alarm-list">
         <div className="headers">Set a New Alarm</div>
         <div className="set-alarm">
@@ -69,38 +68,38 @@ const AlarmList = ({ currentUser, alarms }) => {
             currentUser={currentUser}
           />
         </div>
-        {currentUser &&
-        <>
-        <div className="headers">Current Alarms</div>
-        <div className="alarm-list-body">
-          {
-            alarmList.map((alarm, id) => (
-              <Alarm
-                key={id}
-                currentUser={currentUser}
-                alarmIdList={id}
-                alarmIdDb={alarm.alarm_id}
-                alarm={alarm}
-                alarmList={alarmList}
-                setAlarmList={setAlarmList}
-              />))
-          }
-        </div>
-        </>
+        {currentUser.uid !== "guest" &&
+          <>
+            <div className="headers">Current Alarms</div>
+            <div className="alarm-list-body">
+              {
+                alarmList.map((alarm, id) => (
+                  <Alarm
+                    key={id}
+                    currentUser={currentUser}
+                    alarmIdList={id}
+                    alarmIdDb={alarm.alarm_id}
+                    alarm={alarm}
+                    alarmList={alarmList}
+                    setAlarmList={setAlarmList}
+                  />))
+              }
+            </div>
+          </>
         }
         <hr className="alarm-puzzle-divider" />
         {alarmRinging
           &&
           (puzzleMode === "word" ?
-            
-           <WordPuzzle
-            setAlarmRinging={setAlarmRinging}
-          /> 
-          :
-          <MathPuzzle
-            setAlarmRinging={setAlarmRinging}
-          />
-          
+
+            <WordPuzzle
+              setAlarmRinging={setAlarmRinging}
+            />
+            :
+            <MathPuzzle
+              setAlarmRinging={setAlarmRinging}
+            />
+
           )
         }
       </div>

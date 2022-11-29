@@ -7,7 +7,7 @@ const SetAlarm = ({ alarmList, setAlarmList, nextAlarmId, setNextAlarmId, curren
   const createAlarm = (e) => {
     e.preventDefault();
 
-    if (!currentUser) {
+    if (currentUser.uid === "guest") {
       alert("Please login to create new alarms!");
       return;
     };

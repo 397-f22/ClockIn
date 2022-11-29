@@ -7,7 +7,7 @@ const Alarm = ({ currentUser, alarmIdList, alarmIdDb, alarm, alarmList, setAlarm
   const [update, result] = useDbUpdate(`alarms/${alarmIdDb}`);
 
   const handleChange = () => {
-    if (!currentUser) {
+    if (currentUser.uid === "guest") {
       alert("Please login first to edit alarms!");
       return;
     };

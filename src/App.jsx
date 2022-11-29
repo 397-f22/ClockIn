@@ -11,6 +11,12 @@ const App = () => {
   if (data === undefined) return <h1>Loading data...</h1>;
   if (!data) return <h1>No data found</h1>;
 
+  const uid = !currentUser ? "guest" : currentUser.uid;
+  let user = Object.values(data.users).filter(u => u.uid === uid)[0]
+  if (!user) {
+    user = {uid: "guest", puzzle_mode: "word"}
+  }
+
   return (
     <div>
       <Header
@@ -18,8 +24,7 @@ const App = () => {
         users={Object.values(data.users)}
       />
       <AlarmList
-        currentUser={currentUser}
-        users={Object.values(data.users)}
+        currentUser={user}
         alarms={Object.values(data.alarms)}
       />
     </div>

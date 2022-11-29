@@ -52,7 +52,6 @@ const AlarmList = ({ currentUser, alarms }) => {
       <audio id="alarm" loop>
         <source src={alarmRef} type="audio/mp3" />
       </audio>
-      Change Puzzle Mode
       <PuzzleModeSlider changePuzzleMode={changePuzzleMode} puzzleMode={puzzleMode}/>
       <div className="alarm-list">
         <div className="headers">Set a New Alarm</div>

@@ -22,7 +22,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: rgb(81, 205, 83);
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -60,4 +60,23 @@
   
   .slider.round:before {
     border-radius: 50%;
+  }
+
+  .slider-container {
+    display: flex;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 900;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .math {
+    color: #2196F3;
+    margin: 0px 10px;
+  }
+
+  .word {
+    color: rgb(81, 205, 83);
+    margin: 0px 10px;
   }

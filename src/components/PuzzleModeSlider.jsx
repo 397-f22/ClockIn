@@ -2,11 +2,13 @@ import './PuzzleModeSlider.css'
 const PuzzleModeSlider = ({ changePuzzleMode, puzzleMode }) => {
 
     return (
-        <div>
+        <div className="slider-container">
+            <div className="word">Word</div>
             <label className="switch">
                 <input type="checkbox" onChange={changePuzzleMode}/>
                     <span className="slider round"></span>
             </label>
+            <div className="math">Math</div>
         </div>
     );
 }

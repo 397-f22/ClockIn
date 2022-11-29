@@ -16,11 +16,16 @@ const AlarmList = ({ currentUser, alarms }) => {
 
   const [nextAlarmId, setNextAlarmId] = useState(alarms.length);
   const [alarmRinging, setAlarmRinging] = useState(false);
-  const [puzzleMode,setPuzzleMode] = useState("word");
+  console.log(currentUser.uid)
+  const [puzzleMode,setPuzzleMode] = useState(currentUser.puzzle_mode);
+  const [update, result] = useDbUpdate(`users/${uid}`);
 
   const changePuzzleMode = () =>{
-    setPuzzleMode(puzzleMode === "word" ? "math" : "word")
-    console.log(puzzleMode)
+    setPuzzleMode(puzzleMode === "word" ? "math" : "word");
+    update({
+      "puzzle_mode": puzzleMode
+    });
+   
   }
   // https://stackoverflow.com/questions/64707231/updated-state-value-is-not-reflected-inside-setinterval-in-react
   const timer = useRef(null);

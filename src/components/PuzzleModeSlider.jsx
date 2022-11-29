@@ -5,7 +5,7 @@ const PuzzleModeSlider = ({ changePuzzleMode, puzzleMode }) => {
         <div className="slider-container">
             <div className="word">Word</div>
             <label className="switch">
-                <input type="checkbox" onChange={changePuzzleMode}/>
+                <input type="checkbox" onChange={changePuzzleMode} checked={puzzleMode === "math"}/>
                     <span className="slider round"></span>
             </label>
             <div className="math">Math</div>

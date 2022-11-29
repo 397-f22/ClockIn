@@ -23,7 +23,8 @@ const Header = ({ currentUser, users }) => {
     if (users.filter(user => user.uid === uid).length === 0) {
       update({
         uid: uid,
-        email: currentUser.email
+        email: currentUser.email,
+        "puzzle_mode": "word"
       })
     };
   }, [currentUser]);

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import "./MathPuzzle.css";
 
 let operations = ["+", "-", "*", "/"]
 let solution, problem;
@@ -69,7 +70,7 @@ const MathPuzzle = ({ setAlarmRinging }) => {
 
   return (
     <div>
-      <div>{problem}</div>
+      <div className="math-problem">{problem}</div>
       <input id="puzzle-input" className="puzzle-input" onChange={(e) => setCurrentSolution(e.target.value)} />
     </div>
   )

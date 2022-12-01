@@ -42,5 +42,14 @@ export const alarmShouldRing = (alarmObj) => {
 
 export const parseAlarmTimeString = (alarmObj) => {
   const alarmHour = parseInt(alarmObj.hour);
-  return String(alarmHour % 12).padStart(2, '0') + ":" + String(alarmObj.minute).padStart(2, '0') + " " + ((alarmHour > 12) ? "PM" : "AM");
+
+  let displayHour;
+
+  if (alarmHour % 12 === 0) {
+    displayHour = 12;
+  } else {
+    displayHour = alarmHour % 12;
+  };
+
+  return String(displayHour).padStart(2, '0') + ":" + String(alarmObj.minute).padStart(2, '0') + " " + ((alarmHour >= 12) ? "PM" : "AM");
 };

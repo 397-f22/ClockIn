@@ -1,35 +1,48 @@
 import { useEffect } from "react";
 import { useState } from "react";
 
-let operations = ["addition", "subtraction", "multiplication", "division"]
+let operations = ["+", "-", "*", "/"]
 let solution, problem;
 
+const evaluate = (num1, num2, op) => {
+  switch (op) {
+    case "+":
+      return num1 + num2;
+    case "-":
+      return num1 - num2;
+    case "*":
+      return num1 * num2;
+    case "/":
+      return num1 / num2;
+  };
+};
+
 const generateMath = () => {
-  let num1, num2;
-  let operation;
+  let num1, num2, num3;
+  let operation1, operation2;
   num1 = Math.ceil(Math.random() * 12);
   num2 = Math.ceil(Math.random() * 12);
-  operation = operations[Math.floor(Math.random() * 4)];
+  num3 = Math.ceil(Math.random() * 12);
+  operation1 = operations[Math.floor(Math.random() * 4)];
+  operation2 = operations[Math.floor(Math.random() * 3)];
 
-  switch (operation) {
-    case "addition":
-      solution = num1 + num2;
-      problem = `${num1} + ${num2} = ?`;
-      break;
-    case "subtraction":
-      solution = num1 - num2;
-      problem = `${num1} - ${num2} = ?`;
-      break;
-    case "multiplication":
-      solution = num1 * num2;
-      problem = `${num1} * ${num2} = ?`;
-      break;
-    case "division":
-      solution = num1;
-      num1 = num1 * num2;
-      problem = `${num1} / ${num2} = ?`;
-      break;
-  }
+  if (operation1 === "/") {
+    num1 = num1 * num2;
+  };
+
+  problem = `${num1} ${operation1} ${num2} ${operation2} ${num3} = ?`;
+  solution;
+
+  if (operation2 === "*") {
+    solution = evaluate(num2, num3, "*");
+    solution = evaluate(num1, solution, operation1);
+  } else {
+    solution = evaluate(
+      evaluate(num1, num2, operation1),
+      num3,
+      operation2
+    );
+  };
 }
 
 generateMath();

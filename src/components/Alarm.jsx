@@ -1,6 +1,9 @@
 import "./Alarm.css";
 import { parseAlarmTimeString } from "../utils/helpers";
 import { useDbUpdate } from "../utils/firebase";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+
 const dummyUID = -77;
 const Alarm = ({ currentUser, alarmIdList, alarmIdDb, alarm, alarmList, setAlarmList }) => {
 
@@ -46,7 +49,7 @@ const Alarm = ({ currentUser, alarmIdList, alarmIdDb, alarm, alarmList, setAlarm
       <div className="alarm">
         <div className={`alarm-text ${alarm.active ? "" : "alarm-inactive"}`}>{parseAlarmTimeString(alarm)}</div>
         <input className="alarm-checkbox" type="checkbox" checked={alarm.active} onChange={handleChange} />
-        <button onClick={deleteAlarm}>Delete</button>
+        <FontAwesomeIcon onClick={deleteAlarm} icon={faTrashCan} className="trash-button"/>
       </div>
     )
 };

@@ -12,9 +12,10 @@
 .button-base {
   position: absolute;
   right: 15px;
-  width: 90px;
+  width: 20vw;
+  max-width: 90px;
   height: 30px;
-  font-size: 16px;
+  font-size: 12px;
   border-radius: 15px;
   border: 1px solid black;
   color: white;
@@ -36,5 +37,14 @@
 }
 
 .sign-out-button {
-  background-color: red;
+  background-color: rgb(255, 173, 173);
+  color: black;
+}
+
+.clockin {
+  position: absolute;
+  left: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  top: 20px;
 }

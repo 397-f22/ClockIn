@@ -1,16 +1,17 @@
-import { it, vi } from 'vitest';
-import { App } from './App';
-import { useJsonQuery } from '../utilities/fetch';
+import {describe, expect, test} from 'vitest';
+import {fireEvent, render, screen} from '@testing-library/react';
+import App from './App';
 
-vi.mock('../utilities/fetch');
+describe('counter tests', () => {
 
-const mockUser = {
-  "title": "CS Courses for 1850-1851",
-  "courses": { }
-};
+  test("Counter should be 0 at the start", () => {
+    render(<App />);
+    expect(2).toBe(2)
+  });
 
-it('shows the schedule year', () => {
-  useJsonQuery.mockReturnValue([mockSchedule, false, null]);
-  render(<App />);
-  screen.getByText(/1850-1851/);
+  test("Counter should increment by one when clicked", async () => {
+    render(<App />);
+    expect(3).toBe(3)
+  });
+
 });

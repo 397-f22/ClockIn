@@ -21,10 +21,16 @@ const AlarmList = ({ currentUser, alarms }) => {
   const [update, result] = useDbUpdate(`users/${uid}`);
 
   const changePuzzleMode = () => {
-    setPuzzleMode(puzzleMode === "word" ? "math" : "word")
-    update({
-      "puzzle_mode": puzzleMode === "word" ? "math" : "word"
-    })
+
+    if (alarmRinging) {
+      alert("Please solve puzzle to change puzzle mode!");
+      return;
+    } else {
+      setPuzzleMode(puzzleMode === "word" ? "math" : "word")
+      update({
+        "puzzle_mode": puzzleMode === "word" ? "math" : "word"
+      })
+    }
   }
   // https://stackoverflow.com/questions/64707231/updated-state-value-is-not-reflected-inside-setinterval-in-react
   const timer = useRef(null);
@@ -56,7 +62,7 @@ const AlarmList = ({ currentUser, alarms }) => {
       <audio id="alarm" loop>
         <source src={alarmRef} type="audio/mp3" />
       </audio>
-      <PuzzleModeSlider currentUser={currentUser} changePuzzleMode={changePuzzleMode} puzzleMode={puzzleMode} />
+      <PuzzleModeSlider data-testid="slider" currentUser={currentUser} changePuzzleMode={changePuzzleMode} puzzleMode={puzzleMode} />
       <div className="alarm-list">
         <div className="headers">Set a New Alarm</div>
         <div className="set-alarm">
@@ -103,7 +109,12 @@ const AlarmList = ({ currentUser, alarms }) => {
           )
         }
       </div>
-
+      {false &&
+      <div data-testid="puzzleMode">{puzzleMode}</div>
+      }
+      {false &&
+      <div data-testid="ringing">{alarmRinging}</div>
+      }
     </>
   );
 };

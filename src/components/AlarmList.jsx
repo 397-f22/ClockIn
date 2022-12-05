@@ -41,27 +41,11 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
       timer.current = setInterval(
         () => {
           const alarm = document.getElementById("alarm");
-          if (testing) {
 
-            if (alarmList.some(alarmObj => {
-              const time = new Date();
-              console.log(time.toString())
-              const currentHour = time.getHours(), currentMinute = time.getMinutes(), currentSecond = time.getSeconds();
-              const correctTime = (parseInt(alarmObj.hour) === currentHour && parseInt(alarmObj.minute) === currentMinute && currentSecond < 2);
-              const active = alarmObj.active;
-              console.log(correctTime)
-              return correctTime && active;
-            })) {
-              alarm.play();
-              setAlarmRinging(true);
-            }
-          }
-          else {
             if (alarmList.some(alarm => alarmShouldRing(alarm))) {
               alarm.play();
               setAlarmRinging(true);
-            }
-          }
+            }         
         }, 1000);
     };
 

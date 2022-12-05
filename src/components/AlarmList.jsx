@@ -45,7 +45,8 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
             if (alarmList.some(alarm => alarmShouldRing(alarm))) {
               alarm.play();
               setAlarmRinging(true);
-            }         
+            }
+          
         }, 1000);
     };
 

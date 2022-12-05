@@ -3,6 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
 import AlarmList from './components/AlarmList';
 import { act } from 'react-dom/test-utils';
+import PuzzleModeSlider from './components/PuzzleModeSlider';
 
 describe('A user should not be able to change the puzzle type while any alarm is ringing', () => {
   beforeEach( () => {
@@ -41,15 +42,21 @@ describe('A user should not be able to change the puzzle type while any alarm is
     const mode = screen.getByTestId('puzzleMode')
     const ringing = screen.getByTestId('ringing')
     expect(mode.textContent).toBe('word')
+    expect(ringing.textContent).toBe('false')
     act (() => {
       vi.advanceTimersByTime(4000)
     })
     expect(mode.textContent).toBe('word')
-    act (() => {
-      fireEvent.change(slider)
+    expect(ringing.textContent).toBe('true')
+    //act (() => {
+    fireEvent.change(slider)
+    //})
+    act(() => {
+      fireEvent.click(slider,{target: {checked: true}})
+      fireEvent.click(slider,{target: {checked: false}})
     })
     expect(mode.textContent).toBe('word')
-    expect(mode.textContent).toBe('word')
+    expect(ringing.textContent).toBe('true')
 
     // rerender(<AlarmList currentUser={currentUser} alarms={alarmList} testing />)
     // const ringing2 = screen.getByTestId('ringing')

@@ -1,10 +1,13 @@
-import { describe, expect, test, vi } from 'vitest';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
 import AlarmList from './components/AlarmList';
+import { act } from 'react-dom/test-utils';
 
 describe('A user should not be able to change the puzzle type while any alarm is ringing', () => {
-
+  beforeEach( () => {
+    vi.useFakeTimers()
+  })
   test("puzzleType should stay the same while an alarm is ringing", () => {
     //Check if alarm is ringing because of mock alarmList
     //Check if current puzzle mode is correct
@@ -20,7 +23,7 @@ describe('A user should not be able to change the puzzle type while any alarm is
       "hour": 13,
       "minute": 13,
       "active": true,
-      uid: 12346
+      uid: 12345
     };
 
     let currentUser = {
@@ -29,14 +32,23 @@ describe('A user should not be able to change the puzzle type while any alarm is
     }
 
     let alarmList = [alarm1, alarm2]
-    const date = new Date('November 30, 2022 12:12:00')
+    const date = new Date('November 30, 2022 12:11:59')
     vi.setSystemTime(date)
-    const { container, rerender } = render(<AlarmList currentUser={currentUser} alarms={alarmList} testing />);
+    act( () => {
+      const { container, rerender } = render(<AlarmList currentUser={currentUser} alarms={alarmList} testing />);
+    })
     const slider = screen.getByTestId('slider')
     const mode = screen.getByTestId('puzzleMode')
     const ringing = screen.getByTestId('ringing')
     expect(mode.textContent).toBe('word')
-    expect(ringing.textContent).toBe('false')
+    act (() => {
+      vi.advanceTimersByTime(4000)
+    })
+    expect(ringing.textContent).toBe('true')
+    // rerender(<AlarmList currentUser={currentUser} alarms={alarmList} testing />)
+    // const ringing2 = screen.getByTestId('ringing')
+    // expect(ringing2.textContent).toBe('true')
+
   })
 })
 

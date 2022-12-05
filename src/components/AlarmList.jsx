@@ -13,11 +13,12 @@ import PuzzleModeSlider from "./PuzzleModeSlider";
 const AlarmList = ({ currentUser, alarms, testing }) => {
   const uid = currentUser.uid;
   const [alarmList, setAlarmList] = useState(alarms.filter(alarm => alarm.uid === uid));
-
   const [nextAlarmId, setNextAlarmId] = useState(alarms.length);
   const [alarmRinging, setAlarmRinging] = useState(false);
   const [puzzleMode, setPuzzleMode] = useState(currentUser.puzzle_mode);
   const [update, result] = useDbUpdate(`users/${uid}`);
+
+  let tim = new Date();
   const changePuzzleMode = () => {
 
     if (alarmRinging) {
@@ -25,9 +26,11 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
       return;
     } else {
       setPuzzleMode(puzzleMode === "word" ? "math" : "word")
-      update({
-        "puzzle_mode": puzzleMode === "word" ? "math" : "word"
-      })
+      if (!testing) {
+        update({
+          "puzzle_mode": puzzleMode === "word" ? "math" : "word"
+        })
+      }
     }
   }
   // https://stackoverflow.com/questions/64707231/updated-state-value-is-not-reflected-inside-setinterval-in-react
@@ -38,10 +41,26 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
       timer.current = setInterval(
         () => {
           const alarm = document.getElementById("alarm");
+          if (testing) {
 
-          if (alarmList.some(alarm => alarmShouldRing(alarm))) {
-            alarm.play();
-            setAlarmRinging(true);
+            if (alarmList.some(alarmObj => {
+              const time = new Date();
+              console.log(time.toString())
+              const currentHour = time.getHours(), currentMinute = time.getMinutes(), currentSecond = time.getSeconds();
+              const correctTime = (parseInt(alarmObj.hour) === currentHour && parseInt(alarmObj.minute) === currentMinute && currentSecond < 2);
+              const active = alarmObj.active;
+              console.log(correctTime)
+              return correctTime && active;
+            })) {
+              alarm.play();
+              setAlarmRinging(true);
+            }
+          }
+          else {
+            if (alarmList.some(alarm => alarmShouldRing(alarm))) {
+              alarm.play();
+              setAlarmRinging(true);
+            }
           }
         }, 1000);
     };

@@ -19,7 +19,6 @@ const AlarmList = ({ currentUser, alarms }) => {
   // console.log(currentUser.uid)
   const [puzzleMode, setPuzzleMode] = useState(currentUser.puzzle_mode);
   const [update, result] = useDbUpdate(`users/${uid}`);
-
   const changePuzzleMode = () => {
 
     if (alarmRinging) {
@@ -62,7 +61,7 @@ const AlarmList = ({ currentUser, alarms }) => {
       <audio id="alarm" loop>
         <source src={alarmRef} type="audio/mp3" />
       </audio>
-      <PuzzleModeSlider data-testid="slider" currentUser={currentUser} changePuzzleMode={changePuzzleMode} puzzleMode={puzzleMode} />
+      <PuzzleModeSlider currentUser={currentUser} changePuzzleMode={changePuzzleMode} puzzleMode={puzzleMode} />
       <div className="alarm-list">
         <div className="headers">Set a New Alarm</div>
         <div className="set-alarm">
@@ -109,10 +108,10 @@ const AlarmList = ({ currentUser, alarms }) => {
           )
         }
       </div>
-      {false &&
+      {
       <div data-testid="puzzleMode">{puzzleMode}</div>
       }
-      {false &&
+      {
       <div data-testid="ringing">{alarmRinging}</div>
       }
     </>

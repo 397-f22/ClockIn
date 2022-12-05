@@ -31,11 +31,11 @@ describe('A user should not be able to change the puzzle type while any alarm is
     let alarmList = [alarm1, alarm2]
     const date = new Date('November 30, 2022 12:12:00')
     vi.setSystemTime(date)
-    const { container } = render(<AlarmList currentUser={currentUser} alarms={alarmList} />);
+    const { container, rerender } = render(<AlarmList currentUser={currentUser} alarms={alarmList} />);
     const slider = screen.getByTestId('slider')
     const mode = screen.getByTestId('puzzleMode')
     const ringing = screen.getByTestId('ringing')
-    expect(ringing).toBe(true)
+    expect(mode.textContent).toBe('word')
   })
 })
 

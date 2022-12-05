@@ -44,7 +44,13 @@ describe('A user should not be able to change the puzzle type while any alarm is
     act (() => {
       vi.advanceTimersByTime(4000)
     })
-    expect(ringing.textContent).toBe('true')
+    expect(mode.textContent).toBe('word')
+    act (() => {
+      fireEvent.change(slider)
+    })
+    expect(mode.textContent).toBe('word')
+    expect(mode.textContent).toBe('word')
+
     // rerender(<AlarmList currentUser={currentUser} alarms={alarmList} testing />)
     // const ringing2 = screen.getByTestId('ringing')
     // expect(ringing2.textContent).toBe('true')

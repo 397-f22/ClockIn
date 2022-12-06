@@ -18,7 +18,6 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
   const [puzzleMode, setPuzzleMode] = useState(currentUser.puzzle_mode);
   const [update, result] = useDbUpdate(`users/${uid}`);
 
-  let tim = new Date();
   const changePuzzleMode = () => {
 
     if (alarmRinging) {
@@ -57,6 +56,8 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
   useEffect(() => {
     const uid = currentUser.uid;
     setAlarmList(alarms.filter(alarm => alarm.uid === uid));
+    console.log("effect")
+    console.log(alarmList)
   }, [currentUser, nextAlarmId]);
 
   return (
@@ -69,6 +70,7 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
         <div className="headers">Set a New Alarm</div>
         <div className="set-alarm">
           <SetAlarm
+          testing={testing}
             alarmList={alarmList}
             setAlarmList={setAlarmList}
             nextAlarmId={nextAlarmId}
@@ -80,7 +82,7 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
           <>
             <div className="headers">Current Alarms</div>
             <div className="alarm-list-body">
-              {
+              { 
                 alarmList.map((alarm, id) => (
                   <Alarm
                     key={id}
@@ -118,6 +120,10 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
       {
         testing &&
         <div data-testid="ringing">{alarmRinging.toString()}</div>
+      }
+      {
+        testing &&
+        <div data-testid="alarm-list">{alarmList.length}</div>
       }
     </>
   );

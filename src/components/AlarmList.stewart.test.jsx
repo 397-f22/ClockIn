@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import AlarmList from './components/AlarmList';
+import AlarmList from './AlarmList';
 import { act } from 'react-dom/test-utils';
 
 describe('A user should not be able to change the puzzle type while any alarm is ringing', () => {

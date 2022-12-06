@@ -108,7 +108,7 @@ describe('A user should be able to add an alarm to their list of alarms and have
     await act(async () => { vi.runOnlyPendingTimers() });
     // const listLength = screen.getByTestId('alarm-list')
     // expect(listLength).equal(3)
-    expect(screen.getByText(/2:14 PM/i))
+    expect(screen.findByText(/2:14 PM/i))
     // await screen.findByText(/1:13 PM/i)
 
     // await act (async () => {

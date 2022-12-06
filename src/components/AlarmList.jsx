@@ -56,8 +56,6 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
   useEffect(() => {
     const uid = currentUser.uid;
     setAlarmList(alarms.filter(alarm => alarm.uid === uid));
-    console.log("effect")
-    console.log(alarmList)
   }, [currentUser, nextAlarmId]);
 
   return (

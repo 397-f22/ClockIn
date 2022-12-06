@@ -41,7 +41,7 @@ const SetAlarm = ({ alarmList, setAlarmList, nextAlarmId, setNextAlarmId, curren
   };
 
   return (
-    <form onSubmit={createAlarm}>
+    <form onSubmit={createAlarm} data-testid='submit'>
       <div className="setAlarm">
         <div className="setAlarmColumns">
           <div className="setAlarmColumn">
@@ -73,7 +73,7 @@ const SetAlarm = ({ alarmList, setAlarmList, nextAlarmId, setNextAlarmId, curren
           </div>
         </div>
         <div>
-          <button className="alarmSubmit" type="submit">
+          <button className="alarmSubmit" type="submit" id="alarmSubmit">
             Set Alarm
           </button>
         </div>

@@ -60,7 +60,7 @@ const AlarmList = ({ currentUser, alarms }) => {
 
   return (
     <>
-      <audio id="alarm" loop>
+      <audio id="alarm" data-testid="alarm" loop>
         <source src={alarmRef} type="audio/mp3" />
       </audio>
       <PuzzleModeSlider currentUser={currentUser} changePuzzleMode={changePuzzleMode} puzzleMode={puzzleMode} />

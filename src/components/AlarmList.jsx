@@ -119,10 +119,6 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
         testing &&
         <div data-testid="ringing">{alarmRinging.toString()}</div>
       }
-      {
-        testing &&
-        <div data-testid="alarm-list">{alarmList.length}</div>
-      }
     </>
   );
 };

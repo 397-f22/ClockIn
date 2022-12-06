@@ -42,8 +42,6 @@ describe('A user should not be able to change the puzzle type while any alarm is
     })
     expect(mode.textContent).toBe('word')
     expect(ringing.textContent).toBe('true')
-    //act (() => {
-    //})
     act(() => {
       fireEvent.click(slider,{target: {checked: true}})
       fireEvent.click(slider,{target: {checked: false}})

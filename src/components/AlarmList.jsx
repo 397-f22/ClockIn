@@ -18,6 +18,12 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
   const [puzzleMode, setPuzzleMode] = useState(currentUser.puzzle_mode);
   const [update, result] = useDbUpdate(`users/${uid}`);
 
+  const sortAlarms = (alarms) => {
+    setAlarmList(alarms.sort((a, b) => {
+      return a.hour === b.hour ? a.minute - b.minute : a.hour - b.hour
+    }))
+  }
+
   const changePuzzleMode = () => {
 
     if (alarmRinging) {
@@ -55,8 +61,9 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
 
   useEffect(() => {
     const uid = currentUser.uid;
-    setAlarmList(alarms.filter(alarm => alarm.uid === uid));
+    sortAlarms(alarms.filter(alarm => alarm.uid === uid));
   }, [currentUser, nextAlarmId]);
+
 
   return (
     <>
@@ -70,7 +77,7 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
           <SetAlarm
           testing={testing}
             alarmList={alarmList}
-            setAlarmList={setAlarmList}
+            setAlarmList={sortAlarms}
             nextAlarmId={nextAlarmId}
             setNextAlarmId={setNextAlarmId}
             currentUser={currentUser}
@@ -89,7 +96,7 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
                     alarmIdDb={alarm.alarm_id}
                     alarm={alarm}
                     alarmList={alarmList}
-                    setAlarmList={setAlarmList}
+                    setAlarmList={sortAlarms}
                   />))
               }
             </div>

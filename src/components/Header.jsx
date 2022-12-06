@@ -37,6 +37,7 @@ const Header = ({ currentUser, users }) => {
 
   return (
     <div className="header">
+      <div className="clockin">ClockIn</div>
       <h1>{time.toLocaleTimeString()}</h1>
       {
         currentUser

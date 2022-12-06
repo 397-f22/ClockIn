@@ -12,8 +12,20 @@ const SetAlarm = ({ alarmList, setAlarmList, nextAlarmId, setNextAlarmId, curren
       return;
     };
 
+    let hour;
+
+    if (e.target[0].value === "12") {
+      if (e.target[2].value === "AM") {
+        hour = 0;
+      } else {
+        hour = 12;
+      }
+    } else {
+      hour = e.target[2].value == "AM" ? e.target[0].value : String(parseInt(e.target[0].value) + 12);
+    };
+
     const alarm = {
-      "hour": e.target[2].value == "AM" ? e.target[0].value : String(parseInt(e.target[0].value) + 12),
+      "hour": String(hour),
       "minute": e.target[1].value,
       "active": true,
       "uid": currentUser.uid,

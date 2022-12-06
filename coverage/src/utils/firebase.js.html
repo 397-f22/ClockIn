@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">74.68% </span>
+                <span class="strong">63.29% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>59/79</span>
+                <span class='fraction'>50/79</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">28.57% </span>
+                <span class="strong">14.28% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/7</span>
+                <span class='fraction'>1/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">74.68% </span>
+                <span class="strong">63.29% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>59/79</span>
+                <span class='fraction'>50/79</span>
             </div>
         
             
@@ -168,27 +168,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -200,6 +183,23 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -213,14 +213,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
 import { initializeApp } from "firebase/app";
 import { getDatabase, onValue, ref, update, set } from 'firebase/database';
@@ -246,20 +246,20 @@ const database = getDatabase(firebase);
 //   });
 // };
 &nbsp;
-export const useDbData = (path) =&gt; {
-  const [data, setData] = useState();
-  const [error, setError] = useState(null);
-&nbsp;
-  useEffect(() =&gt; (
-    onValue(ref(database, path), (snapshot) =&gt; {
+export const useDbData = (<span class="fstat-no" title="function not covered" >path) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  const [data, setData] = useState();</span>
+<span class="cstat-no" title="statement not covered" >  const [error, setError] = useState(null);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; (</span>
+<span class="cstat-no" title="statement not covered" >    onValue(ref(database, path), (snapshot) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >      setData(snapshot.val());</span>
-    }, (error) =&gt; {
+<span class="cstat-no" title="statement not covered" >    }, (error) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >      setError(error);</span>
 <span class="cstat-no" title="statement not covered" >    })</span>
-  ), [path]);
-&nbsp;
-  return [data, error];
-};
+<span class="cstat-no" title="statement not covered" >  ), [path]);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  return [data, error];</span>
+<span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
 const makeResult = (<span class="fstat-no" title="function not covered" >error) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  const timestamp = Date.now();</span>
@@ -267,16 +267,16 @@ const makeResult = (<span class="fstat-no" title="function not covered" >error) 
 <span class="cstat-no" title="statement not covered" >  return { timestamp, error, message };</span>
 <span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
-export const useDbUpdate = (<span class="fstat-no" title="function not covered" >path) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const [result, setResult] = useState();</span>
-<span class="cstat-no" title="statement not covered" >  const updateData = useCallback((value) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    update(ref(database, path), value)</span>
-<span class="cstat-no" title="statement not covered" >      .then(() =&gt; setResult(makeResult()))</span>
-<span class="cstat-no" title="statement not covered" >      .catch((error) =&gt; setResult(makeResult(error)))</span>
-<span class="cstat-no" title="statement not covered" >  }, [database, path]);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  return [updateData, result];</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+export const useDbUpdate = (path) =&gt; {
+  const [result, setResult] = useState();
+  const updateData = useCallback((value) =&gt; {
+    update(ref(database, path), value)
+      .then(() =&gt; setResult(makeResult()))
+      .catch((error) =&gt; setResult(makeResult(error)))
+  }, [database, path]);
+&nbsp;
+  return [updateData, result];
+}
 &nbsp;
 // setData: easier to use, not sure if it only works with existing database paths
 export const setData = (<span class="fstat-no" title="function not covered" >path, value) =&gt; (</span>
@@ -291,15 +291,15 @@ const firebaseSignOut = (<span class="fstat-no" title="function not covered" >) 
 &nbsp;
 export { firebaseSignOut as signOut };
 &nbsp;
-export const useAuthState = () =&gt; {
-  const [user, setUser] = useState();
-&nbsp;
-  useEffect(() =&gt; (
-    onAuthStateChanged(getAuth(firebase), setUser)
-  ), []);
-&nbsp;
-  return [user];
-};
+export const useAuthState = (<span class="fstat-no" title="function not covered" >) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  const [user, setUser] = useState();</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; (</span>
+<span class="cstat-no" title="statement not covered" >    onAuthStateChanged(getAuth(firebase), setUser)</span>
+<span class="cstat-no" title="statement not covered" >  ), []);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  return [user];</span>
+<span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -307,7 +307,7 @@ export const useAuthState = () =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-12-06T02:46:45.078Z
+                at 2022-12-06T04:22:34.991Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

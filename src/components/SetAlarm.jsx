@@ -1,7 +1,7 @@
 import "./SetAlarm.css";
 import { useDbUpdate } from "../utils/firebase";
 
-const SetAlarm = ({ alarmList, setAlarmList, nextAlarmId, setNextAlarmId, currentUser }) => {
+const SetAlarm = ({ alarmList, setAlarmList, nextAlarmId, setNextAlarmId, currentUser, testing }) => {
   const [update, result] = useDbUpdate(`alarms/${nextAlarmId}`);
 
   const createAlarm = (e) => {
@@ -27,17 +27,21 @@ const SetAlarm = ({ alarmList, setAlarmList, nextAlarmId, setNextAlarmId, curren
     const alarm = {
       "hour": String(hour),
       "minute": e.target[1].value,
-      "active": true
+      "active": true,
+      "uid": currentUser.uid,
+      "alarm_id": nextAlarmId
     };
 
     setAlarmList([...alarmList, alarm]);
     setNextAlarmId(nextAlarmId + 1);
 
+    if(!testing){
     update({
       ...alarm,
       "alarm_id": nextAlarmId,
       "uid": currentUser.uid
     });
+  }
   };
 
   return (

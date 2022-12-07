@@ -49,7 +49,7 @@ const Alarm = ({ currentUser, alarmIdList, alarmIdDb, alarm, alarmList, setAlarm
       <div className="alarm">
         <div className={`alarm-text ${alarm.active ? "" : "alarm-inactive"}`}>{parseAlarmTimeString(alarm)}</div>
         <input className="alarm-checkbox" type="checkbox" checked={alarm.active} onChange={handleChange} />
-        <FontAwesomeIcon onClick={deleteAlarm} icon={faTrashCan} className="trash-button"/>
+        <FontAwesomeIcon onClick={deleteAlarm} icon={faTrashCan} className="trash-button" data-testid={`delete-${alarmIdDb}`}/>
       </div>
     )
 };

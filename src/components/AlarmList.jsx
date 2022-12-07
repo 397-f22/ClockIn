@@ -13,10 +13,8 @@ import PuzzleModeSlider from "./PuzzleModeSlider";
 const AlarmList = ({ currentUser, alarms, testing }) => {
   const uid = currentUser.uid;
   const [alarmList, setAlarmList] = useState(alarms.filter(alarm => alarm.uid === uid));
-
   const [nextAlarmId, setNextAlarmId] = useState(alarms.length);
   const [alarmRinging, setAlarmRinging] = useState(false);
-  // console.log(currentUser.uid)
   const [puzzleMode, setPuzzleMode] = useState(currentUser.puzzle_mode);
   const [update, result] = useDbUpdate(`users/${uid}`);
 
@@ -27,10 +25,18 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
   }
 
   const changePuzzleMode = () => {
-    setPuzzleMode(puzzleMode === "word" ? "math" : "word")
-    update({
-      "puzzle_mode": puzzleMode === "word" ? "math" : "word"
-    })
+
+    if (alarmRinging) {
+      alert("Please solve puzzle to change puzzle mode!");
+      return;
+    } else {
+      setPuzzleMode(puzzleMode === "word" ? "math" : "word")
+      if (!testing) {
+        update({
+          "puzzle_mode": puzzleMode === "word" ? "math" : "word"
+        })
+      }
+    }
   }
   // https://stackoverflow.com/questions/64707231/updated-state-value-is-not-reflected-inside-setinterval-in-react
   const timer = useRef(null);
@@ -41,10 +47,11 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
         () => {
           const alarm = document.getElementById("alarm");
 
-          if (alarmList.some(alarm => alarmShouldRing(alarm))) {
-            alarm.play();
-            setAlarmRinging(true);
-          }
+            if (alarmList.some(alarm => alarmShouldRing(alarm))) {
+              alarm.play();
+              setAlarmRinging(true);
+            }
+          
         }, 1000);
     };
 
@@ -68,6 +75,7 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
         <div className="headers">Set a New Alarm</div>
         <div className="set-alarm">
           <SetAlarm
+          testing={testing}
             alarmList={alarmList}
             setAlarmList={sortAlarms}
             nextAlarmId={nextAlarmId}
@@ -79,7 +87,7 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
           <>
             <div className="headers">Current Alarms</div>
             <div className="alarm-list-body">
-              {
+              { 
                 alarmList.map((alarm, id) => (
                   <Alarm
                     key={id}

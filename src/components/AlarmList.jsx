@@ -10,7 +10,7 @@ import { useDbUpdate } from "../utils/firebase";
 import MathPuzzle from "./MathPuzzle"
 import PuzzleModeSlider from "./PuzzleModeSlider";
 
-const AlarmList = ({ currentUser, alarms }) => {
+const AlarmList = ({ currentUser, alarms, testing }) => {
   const uid = currentUser.uid;
   const [alarmList, setAlarmList] = useState(alarms.filter(alarm => alarm.uid === uid));
 
@@ -110,7 +110,14 @@ const AlarmList = ({ currentUser, alarms }) => {
           )
         }
       </div>
-
+      {
+        testing &&
+        <div data-testid="puzzleMode">{puzzleMode}</div>
+      }
+      {
+        testing &&
+        <div data-testid="ringing">{alarmRinging.toString()}</div>
+      }
     </>
   );
 };

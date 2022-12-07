@@ -94,7 +94,9 @@ describe('Enter correct solution of the puzzle can stop the alarm.', () => {
     const mathProblem = screen.getByTestId('math-problem')
     const puzzleInput = screen.getByTestId('puzzle-input')
     const solution = eval(mathProblem.innerHTML.substring(0, mathProblem.innerHTML.length - 4))
-    fireEvent.change(puzzleInput, { target: { value: solution } });
+    act(() => {
+      fireEvent.change(puzzleInput, { target: { value: solution } });
+    })
 
     act(() => {
       vi.advanceTimersByTime(4000)

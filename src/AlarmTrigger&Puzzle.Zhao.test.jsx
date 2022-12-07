@@ -51,12 +51,12 @@ describe('Alarm should be triggered at correct time.', () => {
 
 })
 
-describe('A user should not be able to change the puzzle type while any alarm is ringing', () => {
+describe('Enter correct solution of the puzzle can stop the alarm.', () => {
   beforeEach(() => {
     vi.useFakeTimers()
   })
-  
-  test("puzzleMode should stay the same while an alarm is ringing", () => {
+
+  test("Alarms should stop ringing when a puzzle is solved", () => {
     let alarm1 = {
       "hour": 12,
       "minute": 12,

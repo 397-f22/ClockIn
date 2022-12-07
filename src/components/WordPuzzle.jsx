@@ -10,10 +10,17 @@ let word = wordList[randomIndex]["word"];
 let [puzzle, correctIndices] = shuffle(Array.from(word));
 
 const WordPuzzle = ({ setAlarmRinging }) => {
-
   const [currentSolution, setCurrentSolution] = useState([]);
 
   useEffect(() => {
+    if (document.getElementById("word-solution") !== null) {
+      const wordSolution = document.getElementById("word-solution");
+      wordSolution.value = word;
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(currentSolution, word)
     if (currentSolution === word) {
       alert("Puzzle solved!");
       document.getElementById("puzzle-input").value = "";
@@ -22,6 +29,9 @@ const WordPuzzle = ({ setAlarmRinging }) => {
       randomIndex = Math.floor(Math.random() * wordList.length);
       word = wordList[randomIndex]["word"];
       [puzzle, correctIndices] = shuffle(Array.from(word));
+
+      const wordSolution = document.getElementById("word-solution");
+      wordSolution.value = word;
 
       const alarm = document.getElementById("alarm");
       alarm.mute = true;
@@ -32,8 +42,9 @@ const WordPuzzle = ({ setAlarmRinging }) => {
 
   return (
     <div>
+      <div data-testid="word-solution" id="word-solution" className="word-solution" />
       <div>
-        <input id="puzzle-input" className="puzzle-input" onChange={(e) => setCurrentSolution(e.target.value)} />
+        <input data-testid="puzzle-input" id="puzzle-input" className="puzzle-input" onChange={(e) => setCurrentSolution(e.target.value)} />
       </div>
       <div className="puzzle-elements">
         {puzzle.map((char, i) => (

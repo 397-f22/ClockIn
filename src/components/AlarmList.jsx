@@ -51,7 +51,7 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
               alarm.play();
               setAlarmRinging(true);
             }
-          
+
         }, 1000);
     };
 
@@ -75,7 +75,7 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
         <div className="headers">Set a New Alarm</div>
         <div className="set-alarm">
           <SetAlarm
-          testing={testing}
+            testing={testing}
             alarmList={alarmList}
             setAlarmList={sortAlarms}
             nextAlarmId={nextAlarmId}
@@ -87,7 +87,7 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
           <>
             <div className="headers">Current Alarms</div>
             <div className="alarm-list-body">
-              { 
+              {
                 alarmList.map((alarm, id) => (
                   <Alarm
                     key={id}

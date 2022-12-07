@@ -4,6 +4,10 @@
   letter-spacing: 2px;
 }
 
+.word-solution {
+  display: none;
+}
+
 .puzzle-elements {
   display: flex;
   flex-direction: row;

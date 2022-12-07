@@ -1,8 +1,7 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import AlarmList from './components/AlarmList';
+import AlarmList from './AlarmList';
 import { act } from 'react-dom/test-utils';
-import '@testing-library/jest-dom';
 
 
 describe('Alarm should be triggered at correct time.', () => {

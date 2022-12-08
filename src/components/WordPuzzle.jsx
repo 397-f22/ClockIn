@@ -20,10 +20,7 @@ const WordPuzzle = ({ setAlarmRinging, testing }) => {
   }, []);
 
   useEffect(() => {
-    console.log("currentSolution", currentSolution);
-
     if (currentSolution === word) {
-      console.log("word puzzle solved");
       alert("Puzzle solved!");
       document.getElementById("puzzle-input").value = "";
       setCurrentSolution("");
@@ -46,10 +43,7 @@ const WordPuzzle = ({ setAlarmRinging, testing }) => {
     <div>
       <div data-testid="word-solution" id="word-solution" className="word-solution" />
       <div>
-        <input data-testid="puzzle-input" id="puzzle-input" className="puzzle-input" onChange={(e) => {
-          console.log("target", e.target.value)
-          setCurrentSolution(e.target.value)
-        }} />
+        <input data-testid="puzzle-input" id="puzzle-input" className="puzzle-input" onChange={(e) => setCurrentSolution(e.target.value) } />
       </div>
       <div className="puzzle-elements">
         {puzzle.map((char, i) => (

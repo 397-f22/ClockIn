@@ -188,8 +188,6 @@ describe("Word and math puzzles should be deterministic (pulled from a fixed lis
       const mathProblem = screen.getByTestId("math-problem").textContent.slice(0, -4).split(" ");
       const mathSolution = eval(screen.getByTestId("math-problem").textContent.slice(0, -4));
 
-      console.log(mathProblem, mathSolution)
-
       expect(mathProblem.length).toEqual(5);
 
       expect([...Array(12).keys()].map(i => i + 1)).toContainEqual(parseInt(mathProblem[2]));

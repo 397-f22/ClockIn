@@ -5,14 +5,11 @@ import "./AlarmList.css";
 import WordPuzzle from "./WordPuzzle";
 import { alarmShouldRing } from "../utils/helpers";
 import alarmRef from '../audio/alarm.mp3';
-import { mockCurrentAlarmData } from "../utils/helpers";
 import { useDbUpdate } from "../utils/firebase";
 import MathPuzzle from "./MathPuzzle"
 import PuzzleModeSlider from "./PuzzleModeSlider";
 
 const AlarmList = ({ currentUser, alarms, testing }) => {
-  console.log("testing", testing);
-
   const uid = currentUser.uid;
   const [alarmList, setAlarmList] = useState(alarms.filter(alarm => alarm.uid === uid));
   const [nextAlarmId, setNextAlarmId] = useState(alarms.length);

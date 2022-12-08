@@ -11,6 +11,8 @@ import MathPuzzle from "./MathPuzzle"
 import PuzzleModeSlider from "./PuzzleModeSlider";
 
 const AlarmList = ({ currentUser, alarms, testing }) => {
+  console.log("testing", testing);
+
   const uid = currentUser.uid;
   const [alarmList, setAlarmList] = useState(alarms.filter(alarm => alarm.uid === uid));
   const [nextAlarmId, setNextAlarmId] = useState(alarms.length);
@@ -109,10 +111,12 @@ const AlarmList = ({ currentUser, alarms, testing }) => {
 
             <WordPuzzle
               setAlarmRinging={setAlarmRinging}
+              // testing={testing}
             />
             :
             <MathPuzzle
               setAlarmRinging={setAlarmRinging}
+              // testing={testing}
             />
 
           )

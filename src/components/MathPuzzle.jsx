@@ -71,7 +71,10 @@ const MathPuzzle = ({ setAlarmRinging }) => {
   return (
     <div>
       <div className="math-problem" data-testid="math-problem">{problem}</div>
-      <input id="puzzle-input" data-testid="puzzle-input" className="puzzle-input" onChange={(e) => setCurrentSolution(e.target.value)} />
+      <input id="puzzle-input" data-testid="puzzle-input" className="puzzle-input" onChange={(e) => {
+        console.log("target", e.target.value)
+        setCurrentSolution(e.target.value)
+      }} />
     </div>
   )
 }

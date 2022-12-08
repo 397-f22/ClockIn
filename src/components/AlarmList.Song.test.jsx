@@ -1,5 +1,5 @@
 import { act } from 'react-dom/test-utils';
-import { describe, vi } from "vitest";
+import { describe, expect, vi } from "vitest";
 import { fireEvent, render, screen, cleanup } from "@testing-library/react";
 import { wordList } from '../utils/wordList';
 import AlarmList from './AlarmList';
@@ -11,6 +11,8 @@ describe("Alarm should not stop for incorrect puzzle answers", () => {
     vi.spyOn(window.HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
     vi.spyOn(window, "alert").mockImplementation(() => {});
   });
+
+  afterEach(cleanup);
 
   test("If an answer to the word puzzle is incorrect, the alarm should not stop", () => {
     let alarms = [{
@@ -114,9 +116,6 @@ describe("Alarm should not stop for incorrect puzzle answers", () => {
 describe("Word and math puzzles should be deterministic (pulled from a fixed list / constructed with a certain structure)", () => {
   beforeEach(() => {
     vi.useFakeTimers();
-    // vi.spyOn(window.HTMLMediaElement.prototype, "play").mockImplementation(() => {});
-    // vi.spyOn(window.HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
-    // vi.spyOn(window, "alert").mockImplementation(() => {});
   });
 
   test("Word puzzles are pulled from a hardcoded set of words ", () => {
@@ -136,8 +135,9 @@ describe("Word and math puzzles should be deterministic (pulled from a fixed lis
       render(<AlarmList currentUser={currentUser} alarms={alarms} testing />);
     });
 
-    const numTestInstances = 500;
+    const numTestInstances = 50;
 
+    // Generate random word in puzzle 50 times, check each random word is in the list
     for (let i = 0; i < numTestInstances; i++) {
       const date = new Date('December 7, 2022 07:59:59');
       vi.setSystemTime(date);
@@ -156,4 +156,60 @@ describe("Word and math puzzles should be deterministic (pulled from a fixed lis
     };
   });
 
+  test("Math puzzles have 3 operands, two operators", () => {
+    let alarms = [{
+      "hour": 8,
+      "minute": 0,
+      "active": true,
+      uid: 101
+    }];
+
+    let currentUser = {
+      "puzzle_mode": "math",
+      uid: 101
+    };
+
+    act(() => {
+      render(<AlarmList currentUser={currentUser} alarms={alarms} testing />);
+    });
+
+    const numTestInstances = 10;
+
+    // Check that 10 generated math puzzles are of the specified format
+    for (let i = 0; i < numTestInstances; i++) {
+      const date = new Date('December 7, 2022 07:59:59');
+      vi.setSystemTime(date);
+
+      act(() => {
+        vi.advanceTimersByTime(2000);
+      });
+
+      const mathPuzzleInput = screen.getByTestId("puzzle-input");
+      const mathProblem = screen.getByTestId("math-problem").textContent.slice(0, -4).split(" ");
+      const mathSolution = eval(screen.getByTestId("math-problem").textContent.slice(0, -4));
+
+      console.log(mathProblem, mathSolution)
+
+      expect(mathProblem.length).toEqual(5);
+
+      expect([...Array(12).keys()].map(i => i + 1)).toContainEqual(parseInt(mathProblem[2]));
+      expect([...Array(12).keys()].map(i => i + 1)).toContainEqual(parseInt(mathProblem[4]));
+
+      expect(["+", "-", "*", "/"]).toContainEqual(mathProblem[1]);
+      expect(["+", "-", "*"]).toContainEqual(mathProblem[3]);
+
+      if (mathProblem[1] === "/") {
+        expect([...Array(144).keys()].map(i => i + 1)).toContainEqual(parseInt(mathProblem[0]));
+      } else {
+        expect([...Array(12).keys()].map(i => i + 1)).toContainEqual(parseInt(mathProblem[0]));
+      }
+
+      expect([...Array(12).keys()].map(i => i + 1)).toContainEqual(parseInt(mathProblem[2]));
+      expect([...Array(12).keys()].map(i => i + 1)).toContainEqual(parseInt(mathProblem[4]));
+
+      act(() => {
+        fireEvent.change(mathPuzzleInput, {target: {value: mathSolution}});
+      });
+    };
+  });
 });

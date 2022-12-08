@@ -150,6 +150,9 @@ describe("Word and math puzzles should be deterministic (pulled from a fixed lis
       const wordSolution = screen.getByTestId("word-solution").value;
       expect(wordList).toContainEqual({ "word": wordSolution });
 
+      // Also check for test failure during each iteration
+      expect(wordList).not.toContainEqual({ "word": wordSolution.slice(0, 4)});
+
       act(() => {
         fireEvent.change(wordPuzzleInput, {target: {value: wordSolution}});
       });
@@ -202,8 +205,18 @@ describe("Word and math puzzles should be deterministic (pulled from a fixed lis
         expect([...Array(12).keys()].map(i => i + 1)).toContainEqual(parseInt(mathProblem[0]));
       }
 
-      expect([...Array(12).keys()].map(i => i + 1)).toContainEqual(parseInt(mathProblem[2]));
-      expect([...Array(12).keys()].map(i => i + 1)).toContainEqual(parseInt(mathProblem[4]));
+      // Also check for test failure during each iteration
+      expect([...Array(12).keys()].map(i => i + 13)).not.toContainEqual(parseInt(mathProblem[2]));
+      expect([...Array(12).keys()].map(i => i + 13)).not.toContainEqual(parseInt(mathProblem[4]));
+
+      expect(parseInt(mathProblem[1])).toBeFalsy();
+      expect(parseInt(mathProblem[3])).toBeFalsy();
+
+      if (mathProblem[1] === "/") {
+        expect([...Array(144).keys()].map(i => i + 145)).not.toContainEqual(parseInt(mathProblem[0]));
+      } else {
+        expect([...Array(12).keys()].map(i => i + 13)).not.toContainEqual(parseInt(mathProblem[0]));
+      }
 
       act(() => {
         fireEvent.change(mathPuzzleInput, {target: {value: mathSolution}});

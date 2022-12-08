@@ -118,6 +118,8 @@ describe("Word and math puzzles should be deterministic (pulled from a fixed lis
     vi.useFakeTimers();
   });
 
+  afterEach(cleanup);
+
   test("Word puzzles are pulled from a hardcoded set of words ", () => {
     let alarms = [{
       "hour": 8,
@@ -150,8 +152,8 @@ describe("Word and math puzzles should be deterministic (pulled from a fixed lis
       const wordSolution = screen.getByTestId("word-solution").value;
       expect(wordList).toContainEqual({ "word": wordSolution });
 
-      // Also check for test failure during each iteration
-      expect(wordList).not.toContainEqual({ "word": wordSolution.slice(0, 4)});
+      // Also check for test failure during each iteration (i.e. invalid word not in list)
+      expect(wordList).not.toContainEqual({ "word": wordSolution.slice(0, 4) });
 
       act(() => {
         fireEvent.change(wordPuzzleInput, {target: {value: wordSolution}});
@@ -205,17 +207,24 @@ describe("Word and math puzzles should be deterministic (pulled from a fixed lis
         expect([...Array(12).keys()].map(i => i + 1)).toContainEqual(parseInt(mathProblem[0]));
       }
 
-      // Also check for test failure during each iteration
-      expect([...Array(12).keys()].map(i => i + 13)).not.toContainEqual(parseInt(mathProblem[2]));
-      expect([...Array(12).keys()].map(i => i + 13)).not.toContainEqual(parseInt(mathProblem[4]));
+      // Also check for test failure during each iteration (i.e. invalid set of operands, operators)
+      mathProblem[0] = String(parseInt(mathProblem[0]) + 12);
+      mathProblem[2] = String(parseInt(mathProblem[2]) + 12);
+      mathProblem[4] = String(parseInt(mathProblem[4]) + 12);
 
-      expect(parseInt(mathProblem[1])).toBeFalsy();
-      expect(parseInt(mathProblem[3])).toBeFalsy();
+      mathProblem[1] = "//";
+      mathProblem[3] = "/";
+
+      expect([...Array(12).keys()].map(i => i + 1)).not.toContainEqual(parseInt(mathProblem[2]));
+      expect([...Array(12).keys()].map(i => i + 1)).not.toContainEqual(parseInt(mathProblem[4]));
+
+      expect(["+", "-", "*", "/"]).not.toContainEqual(mathProblem[1]);
+      expect(["+", "-", "*"]).not.toContainEqual(mathProblem[3]);
 
       if (mathProblem[1] === "/") {
-        expect([...Array(144).keys()].map(i => i + 145)).not.toContainEqual(parseInt(mathProblem[0]));
+        expect([...Array(144).keys()].map(i => i + 1)).not.toContainEqual(parseInt(mathProblem[0]));
       } else {
-        expect([...Array(12).keys()].map(i => i + 13)).not.toContainEqual(parseInt(mathProblem[0]));
+        expect([...Array(12).keys()].map(i => i + 1)).not.toContainEqual(parseInt(mathProblem[0]));
       }
 
       act(() => {

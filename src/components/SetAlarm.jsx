@@ -77,7 +77,7 @@ const SetAlarm = ({ alarmList, setAlarmList, nextAlarmId, setNextAlarmId, curren
           </div>
         </div>
         <div>
-          <button className="alarmSubmit" type="submit" id="alarmSubmit">
+          <button className="alarmSubmit" type="submit" id="alarmSubmit" data-testid="alarmSubmit">
             Set Alarm
           </button>
         </div>

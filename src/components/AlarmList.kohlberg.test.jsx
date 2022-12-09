@@ -40,7 +40,70 @@ import { act } from 'react-dom/test-utils';
   
     afterEach(cleanup);
   
-    test("If the first puzzle is not solved when it reaches another time, the puzzle stays the same", async () => {
+    test("If the first puzzle is solved when it reaches another time, the new puzzle is different", async () => {
+        let alarmList = [{
+          "hour": 6,
+          "minute": 0,
+          "active": true,
+          uid: 12345
+        },
+        {
+          "hour": 6,
+          "minute": 1,
+          "active": true,
+          uid: 12345
+        }
+      ];
+  
+        let currentUser = {
+          "puzzle_mode": "word",
+          uid: 12345
+        };
+    
+        const date = new Date('December 1, 2022 05:59:59');
+        vi.setSystemTime(date);
+    
+        act(() => {
+          render(<AlarmList currentUser={currentUser} alarms={alarmList} testing />);
+        });
+        const ringing = screen.getByTestId("ringing");
+        expect(ringing.textContent).toBe("false");
+
+        // Time of first alarm
+        act(() => {
+          vi.advanceTimersByTime(1000);
+        });
+    
+        // First alarm goes off, this is the solution to the problem
+        const wordSolutionOne = screen.getByTestId("word-solution");
+    
+        // alarm is rining
+        expect(ringing.textContent).toBe("true");
+
+        // alarm stops when solved
+        const input1 = screen.getByTestId("puzzle-input");
+        act(() => {
+          fireEvent.change(input1, {target: {value: wordSolutionOne.value}});
+        });
+
+        // no solution
+        expect(ringing.textContent).toBe("false");
+        expect(() => (screen.getByTestId("word-solution")).toThrow())
+
+        // Time of second alarm
+        act(() => {
+          vi.advanceTimersByTime(1000);
+        });
+
+        // Second alarm goes off, this is the solution to the problem
+        const wordSolutionTwo = screen.getByTestId("word-solution");
+
+        // alarm is rining
+        expect(ringing.textContent).toBe("true");
+
+      })
+
+      test("If the first puzzle is not solved when it reaches another time, the puzzle stays the same", async () => {
         let alarmList = [{
           "hour": 6,
           "minute": 0,

@@ -50,6 +50,8 @@ describe('When an alarm goes off, the puzzle matches the selected puzzle type', 
   
       // problem should be math problem
       expect(screen.getByTestId("math-problem"))
+      // check word not there
+      expect(() => screen.getByTestId("word-solution")).toThrow()
     })
 
     test("word puzzle", async () => {
@@ -88,6 +90,8 @@ describe('When an alarm goes off, the puzzle matches the selected puzzle type', 
   
       // problem should be word problem
       expect(screen.getByTestId("word-solution"))
+      // check math not there
+      expect(() => screen.getByTestId("math-problem")).toThrow()
     })
 
     test("switch from word to math puzzle", async () => {
@@ -126,6 +130,8 @@ describe('When an alarm goes off, the puzzle matches the selected puzzle type', 
   
       // problem should be word problem
       let sol = screen.getByTestId("word-solution")
+      // check math not there
+      expect(() => screen.getByTestId("math-problem")).toThrow()
       const input = screen.getByTestId("puzzle-input");
         act(() => {
           fireEvent.change(input, {target: {value: sol.value}});
@@ -144,6 +150,8 @@ describe('When an alarm goes off, the puzzle matches the selected puzzle type', 
 
       // problem should be math problem
       expect(screen.getByTestId("math-problem"))
+      // check word not there
+      expect(() => screen.getByTestId("word-solution")).toThrow()
       
     })
   })
